@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Web Academy BD – Free Web Development Courses in Bangla</title>
+
+  <meta name="description" content="Web Academy BD-তে HTML, CSS, JavaScript, Bootstrap, Tailwind CSS ও Web Development শিখো বাংলায়। Free courses, tutorials, coding playground এবং practical lessons।">
+  <meta name="keywords" content="Web Academy BD, Web Development Bangla, HTML Course, CSS Tutorial, JavaScript Bangla, Bootstrap, Tailwind CSS, Free Coding Course">
+  <meta name="author" content="Web Academy BD">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#080d1b">
+
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Web Academy BD – Learn Web Development">
+  <meta property="og:description" content="শূন্য থেকে ওয়েব ডেভেলপমেন্ট শেখো বাংলায়। HTML, CSS, JavaScript এবং আরও অনেক কিছু।">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+  <meta property="og:site_name" content="Web Academy BD">
+  <meta property="og:locale" content="bn_BD">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Web Academy BD">
+  <meta name="twitter:description" content="Learn Web Development in Bangla for free.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236366f1'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "Hind Siliguri", "sans-serif"]
+          },
+          colors: {
+            brand: {
+              50: "#eef2ff",
+              100: "#e0e7ff",
+              500: "#6366f1",
+              600: "#4f46e5",
+              700: "#4338ca"
+            }
+          },
+          boxShadow: {
+            glow: "0 0 50px rgba(99,102,241,0.18)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Website Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Web Academy BD",
+    "description": "বাংলা ভাষায় ওয়েব ডেভেলপমেন্ট শেখার অনলাইন প্ল্যাটফর্ম।",
+    "url": "https://YOUR-DOMAIN.com/",
+    "inLanguage": ["bn", "en"],
+    "educationalCredentialAwarded": "Web Development Learning Certificate"
+  }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; }
+    a, button { -webkit-tap-highlight-color: transparent; }
+
+    .reveal, .reveal-left, .reveal-right {
+      opacity: 0;
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal { transform: translateY(35px); }
+    .reveal-left { transform: translateX(-45px); }
+    .reveal-right { transform: translateX(45px); }
+
+    .reveal.active, .reveal-left.active, .reveal-right.active {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    .hero-code { animation: floating 5s ease-in-out infinite; }
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-13px); }
+    }
+
+    .hero-glow { animation: glowPulse 5s ease-in-out infinite; }
+    @keyframes glowPulse {
+      0%, 100% { opacity: .4; transform: scale(1); }
+      50% { opacity: .8; transform: scale(1.15); }
+    }
+
+    .gradient-text {
+      background-size: 200% auto;
+      animation: gradientMove 4s linear infinite;
+    }
+    @keyframes gradientMove {
+      to { background-position: 200% center; }
+    }
+
+    .btn-effect {
+      position: relative;
+      overflow: hidden;
+      transition: all .3s ease;
+    }
+    .btn-effect:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(99,102,241,.25);
+    }
+
+    .category-card {
+      display: block;
+      padding: 16px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      transition: all .4s ease;
+      overflow: hidden;
+    }
+    .dark .category-card {
+      background: #111a2e;
+      border-color: #334155;
+    }
+    .category-card:hover {
+      transform: translateY(-10px);
+      border-color: #818cf8;
+      box-shadow: 0 20px 45px rgba(99,102,241,.18);
+    }
+    .category-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      transition: transform .7s ease;
+    }
+    .category-card:hover img { transform: scale(1.08); }
+
+    .feature-card {
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid #e2e8f0;
+      background: white;
+      transition: all .4s ease;
+    }
+    .dark .feature-card {
+      border-color: #334155;
+      background: #111a2e;
+    }
+    .feature-card:hover {
+      transform: translateY(-9px);
+      border-color: #818cf8;
+      box-shadow: 0 18px 40px rgba(99,102,241,.13);
+    }
+
+    .premium-banner {
+      background-size: 200% 200%;
+      animation: bannerGradient 7s ease infinite;
+    }
+    @keyframes bannerGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .premium-icon { animation: crownFloat 4s ease-in-out infinite; }
+    @keyframes crownFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px) rotate(8deg); }
+    }
+
+    .image-wrapper { overflow: hidden; border-radius: 14px; }
+    .image-wrapper img { transition: transform .7s ease; }
+    .image-wrapper:hover img { transform: scale(1.1); }
+
+    header { transition: background .3s ease, box-shadow .3s ease; }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      background: #6366f1;
+      transition: width .3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .floating-dot { animation: dotFloat 6s ease-in-out infinite; }
+    @keyframes dotFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
+    }
+
+    footer a { transition: all .3s ease; }
+    footer a:hover { transform: translateX(5px); }
+
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #818cf8;
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal, .reveal-left, .reveal-right {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-800 dark:bg-[#080d1b] dark:text-white font-sans transition-colors duration-300">
+
+<header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-[#080d1b]/90 backdrop-blur-xl">
+  <nav class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between" aria-label="Main navigation">
+    <a href="index.html" class="flex items-center gap-3 group" aria-label="Web Academy BD Home">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-extrabold text-2xl shadow-lg">W</div>
+      <div>
+        <span class="block text-lg font-extrabold tracking-tight">Web Academy</span>
+        <span class="block text-xs text-indigo-500 font-semibold">BD · Learn & Build</span>
+      </div>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+      <a href="index.html" class="nav-link text-indigo-500" aria-current="page">Home</a>
+      <a href="courses.html" class="nav-link hover:text-indigo-500">Courses</a>
+      <a href="playground.html" class="nav-link hover:text-indigo-500">Playground</a>
+      <a href="#features" class="nav-link hover:text-indigo-500">Features</a>
+      <a href="#about" class="nav-link hover:text-indigo-500">About</a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button id="themeBtn" type="button" class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle theme">
+        <i data-lucide="moon"></i>
+      </button>
+      <a href="auth.html" class="hidden sm:inline-flex px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition btn-effect">Login / Register</a>
+      <button id="menuBtn" type="button" class="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-200 dark:border-slate-800 px-5 py-5">
+    <div class="flex flex-col gap-5 font-semibold text-sm">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="playground.html">Playground</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="auth.html" class="text-indigo-500">Login / Register</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-indigo-500/20 blur-[120px] rounded-full hero-glow" aria-hidden="true"></div>
+    <div class="absolute top-40 right-0 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full hero-glow" aria-hidden="true"></div>
+    <div class="absolute top-32 right-20 w-3 h-3 bg-indigo-500 rounded-full floating-dot" aria-hidden="true"></div>
+    <div class="absolute bottom-24 left-20 w-4 h-4 bg-purple-500 rounded-full floating-dot" aria-hidden="true"></div>
+
+    <div class="relative max-w-7xl mx-auto px-5 py-24 md:py-32 grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal-left">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-semibold mb-8">
+          <i data-lucide="sparkles" class="w-4 h-4" aria-hidden="true"></i>
+          Your Journey Starts Here
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-7">
+          Learn Coding.
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 gradient-text">Build Your Future.</span>
+        </h1>
+
+        <p class="text-slate-500 dark:text-slate-400 text-base md:text-lg leading-8 mb-9 max-w-xl">
+          শূন্য থেকে প্রফেশনাল ওয়েব ডেভেলপার হওয়ার যাত্রা শুরু করো। HTML, CSS, JavaScript থেকে শুরু করে Advanced Web Development শিখো সহজ ভাষায়।
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="courses.html" class="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-xl shadow-indigo-500/20 transition btn-effect">
+            Explore Courses <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i>
+          </a>
+          <a href="playground.html" class="inline-flex items-center gap-2 px-7 py-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold transition btn-effect">
+            <i data-lucide="code-2" class="w-5 h-5" aria-hidden="true"></i> Try Coding
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-5 mt-14 max-w-lg">
+          <div><h2 class="text-3xl font-extrabold text-indigo-500">16+</h2><p class="text-xs md:text-sm text-slate-500 mt-2">Learning Topics</p></div>
+          <div><h2 class="text-3xl font-extrabold text-indigo-500">100+</h2><p class="text-xs md:text-sm text-slate-500 mt-2">Lessons Planned</p></div>
+          <div><h2 class="text-3xl font-extrabold text-indigo-500">Free</h2><p class="text-xs md:text-sm text-slate-500 mt-2">To Get Started</p></div>
+        </div>
+      </div>
+
+      <div class="relative hero-code reveal-right">
+        <div class="absolute inset-0 bg-indigo-500/20 blur-3xl rounded-full" aria-hidden="true"></div>
+        <div class="relative rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#111a2e] shadow-2xl overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-700">
+            <div class="flex gap-2"><span class="w-3 h-3 bg-red-500 rounded-full"></span><span class="w-3 h-3 bg-yellow-500 rounded-full"></span><span class="w-3 h-3 bg-green-500 rounded-full"></span></div>
+            <span class="text-xs text-slate-400 font-mono">index.html</span>
+            <i data-lucide="code-2" class="w-5 h-5 text-indigo-500" aria-hidden="true"></i>
+          </div>
+          <div class="p-6 md:p-8 font-mono text-sm leading-9 overflow-x-auto" aria-label="HTML code example">
+            <p class="text-slate-400">&lt;!DOCTYPE html&gt;</p>
+            <p><span class="text-pink-400">&lt;html</span> <span class="text-yellow-300">lang=</span><span class="text-green-400">"en"</span><span class="text-pink-400">&gt;</span></p>
+            <p class="pl-5 text-pink-400">&lt;head&gt;</p>
+            <p class="pl-10"><span class="text-pink-400">&lt;title&gt;</span><span class="text-white">My Website</span><span class="text-pink-400">&lt;/title&gt;</span></p>
+            <p class="pl-5 text-pink-400">&lt;/head&gt;</p>
+            <p class="pl-5 text-pink-400">&lt;body&gt;</p>
+            <p class="pl-10"><span class="text-pink-400">&lt;h1&gt;</span><span class="text-green-400">Hello World!</span><span class="text-pink-400">&lt;/h1&gt;</span></p>
+            <p class="pl-10"><span class="text-pink-400">&lt;p&gt;</span><span class="text-white">Welcome to coding.</span><span class="text-pink-400">&lt;/p&gt;</span></p>
+            <p class="pl-5 text-pink-400">&lt;/body&gt;</p>
+            <p class="text-pink-400">&lt;/html&gt;</p>
+          </div>
+          <div class="m-5 p-6 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+            <p class="text-xs text-indigo-100 mb-3">LIVE PREVIEW</p>
+            <h2 class="text-2xl font-extrabold mb-2">Hello World!</h2>
+            <p class="text-sm text-indigo-100">Welcome to coding.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="py-20 bg-slate-50 dark:bg-[#0d1527]" aria-labelledby="categories-title">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-14 reveal">
+        <span class="text-indigo-500 font-bold text-sm">EXPLORE CATEGORIES</span>
+        <h2 id="categories-title" class="text-3xl md:text-4xl font-extrabold mt-4 mb-4">What Do You Want to Learn?</h2>
+        <p class="text-slate-500 dark:text-slate-400">তোমার পছন্দের বিষয় নির্বাচন করে শেখা শুরু করো।</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <a href="courses.html?category=frontend" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop" alt="HTML web development learning" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">HTML5</h3><p class="text-sm text-slate-500 mt-2">Website Structure</p>
+        </a>
+        <a href="courses.html?category=frontend" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop" alt="CSS web design and styling" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">CSS3</h3><p class="text-sm text-slate-500 mt-2">Website Styling</p>
+        </a>
+        <a href="courses.html?category=frontend" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=600&auto=format&fit=crop" alt="JavaScript programming code" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">JavaScript</h3><p class="text-sm text-slate-500 mt-2">Website Functionality</p>
+        </a>
+        <a href="courses.html?category=framework" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop" alt="Bootstrap web development" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">Bootstrap</h3><p class="text-sm text-slate-500 mt-2">CSS Framework</p>
+        </a>
+        <a href="courses.html?category=framework" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop" alt="Tailwind CSS website design" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">Tailwind CSS</h3><p class="text-sm text-slate-500 mt-2">Utility First CSS</p>
+        </a>
+        <a href="courses.html?category=frontend" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&auto=format&fit=crop" alt="React frontend development" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">React.js</h3><p class="text-sm text-slate-500 mt-2">Frontend Library</p>
+        </a>
+        <a href="courses.html?category=backend" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop" alt="PHP backend programming" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">PHP</h3><p class="text-sm text-slate-500 mt-2">Backend Development</p>
+        </a>
+        <a href="courses.html?category=database" class="category-card group reveal">
+          <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&auto=format&fit=crop" alt="MySQL database management" width="600" height="160" loading="lazy" decoding="async"></div>
+          <h3 class="font-bold mt-5 text-lg">MySQL</h3><p class="text-sm text-slate-500 mt-2">Database Management</p>
+        </a>
+      </div>
+
+      <div class="text-center mt-10 reveal">
+        <a href="courses.html" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-indigo-500 text-indigo-500 font-bold hover:bg-indigo-600 hover:text-white transition btn-effect">View All Courses <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-24" aria-labelledby="features-title">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-14 reveal">
+        <span class="text-indigo-500 font-bold text-sm">WHY WEB ACADEMY?</span>
+        <h2 id="features-title" class="text-3xl md:text-4xl font-extrabold mt-4 mb-4">Learn Better, Build Faster</h2>
+        <p class="text-slate-500 dark:text-slate-400">শেখার প্রতিটি ধাপ সহজ ও সুন্দরভাবে সাজানো।</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div class="feature-card reveal"><i data-lucide="book-open" class="w-9 h-9 text-indigo-500" aria-hidden="true"></i><h3 class="text-xl font-bold mt-6 mb-3">Book Style Lessons</h3><p class="text-slate-500 leading-7">প্রতিটি কোর্স বইয়ের মতো অধ্যায় ও লেসনে সাজানো থাকবে।</p></div>
+        <div class="feature-card reveal"><i data-lucide="code-2" class="w-9 h-9 text-indigo-500" aria-hidden="true"></i><h3 class="text-xl font-bold mt-6 mb-3">Live Code Playground</h3><p class="text-slate-500 leading-7">নিজের হাতে কোড লিখে সরাসরি Output দেখতে পারবে।</p></div>
+        <div class="feature-card reveal"><i data-lucide="languages" class="w-9 h-9 text-indigo-500" aria-hidden="true"></i><h3 class="text-xl font-bold mt-6 mb-3">Bangla & English</h3><p class="text-slate-500 leading-7">বাংলা ও ইংরেজি উভয় ভাষায় Tutorial শেখার সুবিধা।</p></div>
+        <div class="feature-card reveal"><i data-lucide="smartphone" class="w-9 h-9 text-indigo-500" aria-hidden="true"></i><h3 class="text-xl font-bold mt-6 mb-3">Fully Responsive</h3><p class="text-slate-500 leading-7">Mobile, Tablet এবং Desktop সব ডিভাইসে সুন্দর ডিজাইন।</p></div>
+        <div class="feature-card reveal"><i data-lucide="chart-no-axes-combined" class="w-9 h-9 text-indigo-500" aria-hidden="true"></i><h3 class="text-xl font-bold mt-6 mb-3">Track Your Progress</h3><p class="text-slate-500 leading-7">কোন লেসন শেষ করেছ এবং কতটুকু শিখেছ তা দেখতে পারবে।</p></div>
+        <div class="feature-card reveal"><i data-lucide="trophy" class="w-9 h-9 text-indigo-500" aria-hidden="true"></i><h3 class="text-xl font-bold mt-6 mb-3">Quiz & Projects</h3><p class="text-slate-500 leading-7">Quiz ও বাস্তব Project তৈরি করে নিজের দক্ষতা যাচাই করো।</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE LEARNING -->
+  <section class="py-20 bg-slate-50 dark:bg-[#0d1527]">
+    <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal-left">
+        <span class="text-green-500 font-bold text-sm">START LEARNING TODAY</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold mt-5 mb-6">Start Your Coding Journey For Free</h2>
+        <p class="text-slate-500 dark:text-slate-400 leading-8 mb-8">এখানে তোমার শেখার যাত্রা শুরু করতে কোনো Premium Subscription প্রয়োজন নেই। প্রথমে Free Course দিয়ে নিজের দক্ষতা তৈরি করো।</p>
+        <a href="courses.html" class="inline-flex items-center gap-2 px-7 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition btn-effect">Start Learning <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </div>
+
+      <div class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#111a2e] p-8 shadow-xl reveal-right">
+        <div class="flex items-center justify-between mb-7"><h3 class="text-xl font-extrabold">Free Learning</h3><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">AVAILABLE</span></div>
+        <div class="space-y-6">
+          <div class="flex gap-4 items-center"><div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold">5</div><div class="flex-1"><h4 class="font-bold">HTML5 Complete Course</h4><p class="text-sm text-slate-500">Beginner to Advanced</p></div><i data-lucide="check-circle" class="text-green-500" aria-hidden="true"></i></div>
+          <div class="flex gap-4 items-center"><div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center"><i data-lucide="palette" aria-hidden="true"></i></div><div class="flex-1"><h4 class="font-bold">CSS3 Complete Course</h4><p class="text-sm text-slate-500">Beginner to Advanced</p></div><i data-lucide="check-circle" class="text-green-500" aria-hidden="true"></i></div>
+          <div class="flex gap-4 items-center"><div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center"><i data-lucide="file-code" aria-hidden="true"></i></div><div class="flex-1"><h4 class="font-bold">JavaScript Complete Course</h4><p class="text-sm text-slate-500">Beginner to Advanced</p></div><i data-lucide="check-circle" class="text-green-500" aria-hidden="true"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="premium-banner rounded-3xl p-9 md:p-14 bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-800 text-white relative overflow-hidden reveal">
+        <div class="absolute right-0 top-0 opacity-10 premium-icon" aria-hidden="true"><i data-lucide="crown" class="w-72 h-72"></i></div>
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl" aria-hidden="true"></div>
+        <div class="relative max-w-2xl">
+          <span class="px-4 py-2 bg-white/20 rounded-full text-sm font-semibold">PREMIUM LEARNING</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold mt-7 mb-5">Advanced Learning Is Coming Soon!</h2>
+          <p class="text-indigo-100 leading-8 mb-8">ভবিষ্যতে Professional Course, Real World Projects এবং Advanced Tutorial যুক্ত করা হবে।</p>
+          <span class="inline-flex items-center gap-2 bg-white text-indigo-700 px-6 py-3 rounded-xl font-bold"><i data-lucide="clock" aria-hidden="true"></i> Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 bg-slate-50 dark:bg-[#0d1527]" aria-labelledby="about-title">
+    <div class="max-w-4xl mx-auto px-5 text-center reveal">
+      <div class="w-16 h-16 rounded-2xl bg-indigo-100 dark:bg-indigo-500/10 text-indigo-600 mx-auto flex items-center justify-center mb-7"><i data-lucide="graduation-cap" class="w-9 h-9" aria-hidden="true"></i></div>
+      <h2 id="about-title" class="text-3xl md:text-4xl font-extrabold mb-6">About Web Academy BD</h2>
+      <p class="text-slate-500 dark:text-slate-400 leading-8">Web Academy BD হলো একটি Online Web Development Learning Platform। আমাদের লক্ষ্য হলো সহজ ভাষায় HTML, CSS, JavaScript এবং অন্যান্য আধুনিক Web Technologies শেখার সুযোগ তৈরি করা।</p>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="pt-14 pb-8 border-t border-slate-200 dark:border-slate-800">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="reveal">
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-extrabold text-xl">W</div><span class="text-xl font-extrabold">Web Academy BD</span></div>
+        <p class="text-sm text-slate-500 leading-7">Learn coding, develop skills and build your future.</p>
+      </div>
+      <div class="reveal"><h2 class="font-bold mb-5">Quick Links</h2><div class="space-y-3 text-sm text-slate-500"><a href="index.html" class="block hover:text-indigo-500">Home</a><a href="courses.html" class="block hover:text-indigo-500">Courses</a><a href="playground.html" class="block hover:text-indigo-500">Playground</a></div></div>
+      <div class="reveal"><h2 class="font-bold mb-5">Popular Courses</h2><div class="space-y-3 text-sm text-slate-500"><a href="courses.html" class="block">HTML5</a><a href="courses.html" class="block">CSS3</a><a href="courses.html" class="block">JavaScript</a><a href="courses.html" class="block">PHP & Laravel</a></div></div>
+      <div class="reveal"><h2 class="font-bold mb-5">Account</h2><div class="space-y-3 text-sm text-slate-500"><a href="auth.html" class="block hover:text-indigo-500">Login</a><a href="auth.html" class="block hover:text-indigo-500">Register</a><a href="dashboard.html" class="block hover:text-indigo-500">Dashboard</a></div></div>
+    </div>
+    <div class="border-t border-slate-200 dark:border-slate-800 mt-12 pt-7 text-center">
+      <p class="text-sm text-slate-500">© 2026 Web Academy BD. All Rights Reserved.</p>
+      <p class="text-xs text-slate-400 mt-2">Designed for Future Masum Parvej Web Developers.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js" defer></script>
+<script src="js/language.js" defer></script>
+<script src="js/auth-guard.js" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const themeBtn = document.getElementById("themeBtn");
+  const header = document.querySelector("header");
+
+  function refreshIcons() {
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  // Mobile menu
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => {
+      const opened = mobileMenu.classList.toggle("hidden") === false;
+      menuBtn.setAttribute("aria-expanded", String(opened));
+      menuBtn.setAttribute("aria-label", opened ? "Close menu" : "Open menu");
+      menuBtn.innerHTML = `<i data-lucide="${opened ? "x" : "menu"}"></i>`;
+      refreshIcons();
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open menu");
+        menuBtn.innerHTML = '<i data-lucide="menu"></i>';
+        refreshIcons();
+      });
+    });
+  }
+
+  // Theme
+  function updateThemeIcon() {
+    if (!themeBtn) return;
+    const dark = document.documentElement.classList.contains("dark");
+    themeBtn.innerHTML = `<i data-lucide="${dark ? "sun" : "moon"}"></i>`;
+    themeBtn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    refreshIcons();
+  }
+
+  try {
+    const savedTheme = localStorage.getItem("webAcademyTheme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    }
+  } catch (error) {
+    console.warn("Theme preference could not be loaded.");
+  }
+
+  updateThemeIcon();
+
+  themeBtn?.addEventListener("click", () => {
+    const dark = document.documentElement.classList.toggle("dark");
+    try {
+      localStorage.setItem("webAcademyTheme", dark ? "dark" : "light");
+    } catch (error) {
+      console.warn("Theme preference could not be saved.");
+    }
+    updateThemeIcon();
+  });
+
+  // Scroll reveal
+  const revealElements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          currentObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    revealElements.forEach(element => observer.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add("active"));
+  }
+
+  // Header shadow
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      header?.classList.toggle("shadow-lg", window.scrollY > 30);
+      ticking = false;
+    });
+  }, { passive: true });
+
+  refreshIcons();
+});
+</script>
+
+</body>
+</html>

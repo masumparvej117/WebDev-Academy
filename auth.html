@@ -1,0 +1,946 @@
+
+<!-- <!-- <!DOCTYPE html> -->
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4f46e5">
+
+    <title>Login & Register | Web Academy BD</title>
+
+    <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236366f1'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: "class" };
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .field {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #0f172a;
+            outline: none;
+            transition: .25s;
+        }
+
+        .field:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+        }
+
+        .dark .field {
+            background: #1e293b;
+            border-color: #334155;
+            color: white;
+        }
+
+        .field::placeholder {
+            color: #94a3b8;
+        }
+
+        .image-panel {
+            position: relative;
+            min-height: 340px;
+            overflow: hidden;
+            background: #1e1b4b;
+        }
+
+        .auth-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.08);
+            transition:
+                opacity .8s ease,
+                transform 1.2s ease,
+                visibility .8s;
+        }
+
+        .auth-image.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(30,27,75,.88),
+                rgba(79,70,229,.55),
+                rgba(88,28,135,.75)
+            );
+        }
+
+        .glass-content {
+            background: rgba(255,255,255,.13);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.25);
+            box-shadow: 0 12px 40px rgba(0,0,0,.2);
+            animation: glassEnter .5s ease;
+        }
+
+        @keyframes glassEnter {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-panel {
+            animation: formEnter .4s ease;
+        }
+
+        @keyframes formEnter {
+            from {
+                opacity: .5;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .tab-inactive {
+            color: #64748b;
+        }
+
+        .dark .tab-inactive {
+            color: #cbd5e1;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 2px solid #818cf8;
+            outline-offset: 2px;
+        }
+
+        @media(max-width:767px) {
+            .image-panel {
+                min-height: 270px;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-3 sm:p-5">
+
+<div class="w-full max-w-6xl grid md:grid-cols-2 bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden">
+
+    <!-- =================================
+         LEFT SIDE - IMAGE & GLASS
+    ================================== -->
+
+    <div class="image-panel">
+
+        <!-- LOGIN IMAGE -->
+        <img
+            id="loginImage"
+            class="auth-image active"
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85"
+            alt="Login Web Learning"
+        >
+
+        <!-- REGISTER IMAGE -->
+        <img
+            id="registerImage"
+            class="auth-image"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85"
+            alt="Registration Web Development"
+        >
+
+        <div class="image-overlay"></div>
+
+        <div class="relative z-10 min-h-[270px] md:min-h-full flex flex-col justify-between p-6 sm:p-10 text-white">
+
+            <a href="index.html" class="text-2xl font-bold">
+                Web Academy BD
+            </a>
+
+            <!-- LOGIN GLASS -->
+            <div id="loginGlass" class="glass-content p-6 sm:p-7 rounded-3xl my-8">
+
+                <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                    <i data-lucide="log-in" class="w-8 h-8"></i>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl font-bold mb-4">
+                    Welcome Back!
+                </h1>
+
+                <p class="text-white/85 leading-7">
+                    Continue your learning journey and build your future with Web Academy BD.
+                </p>
+
+                <div class="flex gap-3 flex-wrap mt-6">
+                    <span class="bg-white/15 px-3 py-2 rounded-lg text-sm">Learn</span>
+                    <span class="bg-white/15 px-3 py-2 rounded-lg text-sm">Practice</span>
+                    <span class="bg-white/15 px-3 py-2 rounded-lg text-sm">Grow</span>
+                </div>
+            </div>
+
+            <!-- REGISTER GLASS -->
+            <div id="registerGlass" class="glass-content p-6 sm:p-7 rounded-3xl my-8 hidden">
+
+                <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                    <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl font-bold mb-4">
+                    Start Your Journey!
+                </h1>
+
+                <p class="text-white/85 leading-7">
+                    Create your account and start learning HTML, CSS, JavaScript and modern web technologies.
+                </p>
+
+                <div class="flex gap-3 flex-wrap mt-6">
+                    <span class="bg-white/15 px-3 py-2 rounded-lg text-sm">HTML</span>
+                    <span class="bg-white/15 px-3 py-2 rounded-lg text-sm">CSS</span>
+                    <span class="bg-white/15 px-3 py-2 rounded-lg text-sm">JavaScript</span>
+                </div>
+            </div>
+
+            <p class="text-sm text-white/70">
+                © 2026 Web Academy BD
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- =================================
+         RIGHT SIDE - FORMS
+    ================================== -->
+
+    <div class="p-5 sm:p-8 md:p-10">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-8">
+
+            <a href="index.html" class="md:hidden font-bold text-xl text-indigo-600">
+                Web Academy BD
+            </a>
+
+            <div class="flex gap-2 ml-auto">
+
+                <button onclick="setLanguage('bn')"
+                    data-language="bn"
+                    class="language-btn px-3 py-2 rounded-lg text-sm bg-slate-100 dark:bg-slate-800 dark:text-white">
+                    বাংলা
+                </button>
+
+                <button onclick="setLanguage('en')"
+                    data-language="en"
+                    class="language-btn px-3 py-2 rounded-lg text-sm bg-slate-100 dark:bg-slate-800 dark:text-white">
+                    EN
+                </button>
+
+                <button id="themeButton" onclick="toggleTheme()"
+                    class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 dark:text-white"
+                    aria-label="Toggle theme">
+                    <i data-lucide="moon" class="w-5 h-5"></i>
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- TABS -->
+        <div class="grid grid-cols-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-8">
+
+            <button id="loginTab" onclick="showForm('login')"
+                class="py-3 rounded-lg font-semibold tab-active">
+                Login
+            </button>
+
+            <button id="registerTab" onclick="showForm('register')"
+                class="py-3 rounded-lg font-semibold tab-inactive">
+                Register
+            </button>
+
+        </div>
+
+
+        <!-- =================================
+             LOGIN FORM
+        ================================== -->
+
+        <form id="loginForm" class="form-panel space-y-5">
+
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white">
+                    Welcome Back!
+                </h2>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-2">
+                    Login to continue learning.
+                </p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    Email or Username
+                </label>
+
+                <input id="loginIdentity" type="text" required
+                    autocomplete="username"
+                    placeholder="Enter email or username"
+                    class="field">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    Password
+                </label>
+
+                <div class="relative">
+                    <input id="loginPassword" type="password" required
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        class="field pr-12">
+
+                    <button type="button"
+                        onclick="togglePassword('loginPassword',this)"
+                        class="absolute right-4 top-3.5 text-slate-500">
+                        <i data-lucide="eye" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit"
+                class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition">
+                Login
+            </button>
+
+            <p id="loginMessage" role="status" aria-live="polite"
+                class="text-center text-sm"></p>
+
+            <p class="text-center text-sm text-slate-500 dark:text-slate-400">
+                Don't have an account?
+                <button type="button" onclick="showForm('register')"
+                    class="text-indigo-600 font-semibold hover:underline">
+                    Register Now
+                </button>
+            </p>
+
+        </form>
+
+
+        <!-- =================================
+             REGISTER FORM
+        ================================== -->
+
+        <form id="registerForm" class="form-panel space-y-4 hidden">
+
+            <div class="mb-5">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white">
+                    Create Account
+                </h2>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-2">
+                    Join Web Academy BD today.
+                </p>
+            </div>
+
+            <!-- NAME -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    1. Full Name
+                </label>
+
+                <input id="regName" type="text" required maxlength="80"
+                    autocomplete="name"
+                    placeholder="Your full name" class="field">
+            </div>
+
+            <!-- USERNAME -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    2. Username
+                </label>
+
+                <input id="regUsername" type="text" required minlength="3" maxlength="30"
+                    pattern="[A-Za-z0-9_]+"
+                    autocomplete="username"
+                    placeholder="Choose a username" class="field">
+            </div>
+
+            <!-- EMAIL -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    3. Email Address
+                </label>
+
+                <input id="regEmail" type="email" required
+                    autocomplete="email"
+                    placeholder="example@email.com" class="field">
+            </div>
+
+            <!-- PHONE -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    4. Phone Number
+                </label>
+
+                <input id="regPhone" type="tel" required
+                    autocomplete="tel"
+                    placeholder="+8801XXXXXXXXX"
+                    pattern="(\+8801[3-9][0-9]{8}|01[3-9][0-9]{8})"
+                    class="field">
+            </div>
+
+            <!-- DOB -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    5. Date of Birth
+                </label>
+
+                <input id="regDob" type="date" required class="field">
+            </div>
+
+            <!-- GENDER -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    6. Gender
+                </label>
+
+                <select id="regGender" required class="field">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+
+            <!-- PASSWORD -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    7. Password
+                </label>
+
+                <div class="relative">
+                    <input id="regPassword" type="password" required minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Minimum 8 characters"
+                        class="field pr-12">
+
+                    <button type="button"
+                        onclick="togglePassword('regPassword',this)"
+                        class="absolute right-4 top-3.5 text-slate-500">
+                        <i data-lucide="eye" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+            <div>
+                <label class="block text-sm font-medium mb-2 dark:text-slate-200">
+                    8. Confirm Password
+                </label>
+
+                <div class="relative">
+                    <input id="regConfirmPassword" type="password" required minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Enter password again"
+                        class="field pr-12">
+
+                    <button type="button"
+                        onclick="togglePassword('regConfirmPassword',this)"
+                        class="absolute right-4 top-3.5 text-slate-500">
+                        <i data-lucide="eye" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TERMS -->
+            <label class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+                <input type="checkbox" id="terms" required class="mt-1">
+                <span>
+                    I agree to the Terms & Conditions and Privacy Policy.
+                </span>
+            </label>
+
+            <button type="submit"
+                class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition">
+                Create Account
+            </button>
+
+            <p id="registerMessage" role="status" aria-live="polite"
+                class="text-center text-sm"></p>
+
+            <p class="text-center text-sm text-slate-500 dark:text-slate-400">
+                Already have an account?
+                <button type="button" onclick="showForm('login')"
+                    class="text-indigo-600 font-semibold hover:underline">
+                    Login Now
+                </button>
+            </p>
+
+        </form>
+
+
+        <div class="mt-8 text-center">
+            <a href="index.html" class="text-indigo-600 hover:underline text-sm">
+                ← Back to Home
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+/* ========================================
+   1. THEME SYSTEM
+======================================== */
+
+function updateThemeIcon() {
+    const button = document.getElementById("themeButton");
+    const isDark = document.documentElement.classList.contains("dark");
+
+    button.innerHTML = isDark
+        ? '<i data-lucide="sun" class="w-5 h-5"></i>'
+        : '<i data-lucide="moon" class="w-5 h-5"></i>';
+
+    if (window.lucide) lucide.createIcons();
+}
+
+function toggleTheme() {
+    document.documentElement.classList.toggle("dark");
+
+    const theme = document.documentElement.classList.contains("dark")
+        ? "dark" : "light";
+
+    localStorage.setItem("theme", theme);
+    localStorage.setItem("webAcademyTheme", theme);
+
+    updateThemeIcon();
+}
+
+const savedTheme =
+    localStorage.getItem("webAcademyTheme") ||
+    localStorage.getItem("theme") ||
+    "light";
+
+document.documentElement.classList.toggle("dark", savedTheme === "dark");
+
+
+/* ========================================
+   2. LANGUAGE SYSTEM
+======================================== */
+
+const authTranslations = {
+
+    en: {
+        login: "Login",
+        register: "Register",
+        welcome: "Welcome Back!",
+        loginText: "Login to continue learning.",
+        identity: "Email or Username",
+        identityPlaceholder: "Enter email or username",
+        password: "Password",
+        passwordPlaceholder: "Enter your password",
+        create: "Create Account",
+        createText: "Join Web Academy BD today.",
+        name: "Full Name",
+        username: "Username",
+        email: "Email Address",
+        phone: "Phone Number",
+        dob: "Date of Birth",
+        gender: "Gender",
+        chooseGender: "Select Gender",
+        male: "Male",
+        female: "Female",
+        other: "Other",
+        privateGender: "Prefer not to say",
+        confirm: "Confirm Password",
+        confirmPlaceholder: "Enter password again",
+        minimum: "Minimum 8 characters",
+        terms: "I agree to the Terms & Conditions and Privacy Policy.",
+        createButton: "Create Account",
+        back: "← Back to Home",
+        loginNow: "Login Now",
+        registerNow: "Register Now",
+        noAccount: "Don't have an account?",
+        haveAccount: "Already have an account?"
+    },
+
+    bn: {
+        login: "লগইন",
+        register: "রেজিস্ট্রেশন",
+        welcome: "আবার স্বাগতম!",
+        loginText: "শেখা চালিয়ে যেতে লগইন করো।",
+        identity: "ইমেইল অথবা ইউজারনেম",
+        identityPlaceholder: "ইমেইল অথবা ইউজারনেম দাও",
+        password: "পাসওয়ার্ড",
+        passwordPlaceholder: "তোমার পাসওয়ার্ড দাও",
+        create: "অ্যাকাউন্ট তৈরি করো",
+        createText: "আজই Web Academy BD-তে যোগ দাও।",
+        name: "সম্পূর্ণ নাম",
+        username: "ইউজারনেম",
+        email: "ইমেইল ঠিকানা",
+        phone: "মোবাইল নম্বর",
+        dob: "জন্ম তারিখ",
+        gender: "লিঙ্গ",
+        chooseGender: "লিঙ্গ নির্বাচন করো",
+        male: "পুরুষ",
+        female: "নারী",
+        other: "অন্যান্য",
+        privateGender: "বলতে অনিচ্ছুক",
+        confirm: "পাসওয়ার্ড নিশ্চিত করো",
+        confirmPlaceholder: "আবার পাসওয়ার্ড দাও",
+        minimum: "কমপক্ষে ৮ অক্ষর",
+        terms: "আমি Terms & Conditions এবং Privacy Policy-তে সম্মত।",
+        createButton: "অ্যাকাউন্ট তৈরি করো",
+        back: "← হোমে ফিরে যাও",
+        loginNow: "এখন লগইন করো",
+        registerNow: "এখন রেজিস্ট্রেশন করো",
+        noAccount: "অ্যাকাউন্ট নেই?",
+        haveAccount: "আগে থেকেই অ্যাকাউন্ট আছে?"
+    }
+
+};
+
+function setLanguage(lang) {
+
+    if (!authTranslations[lang]) return;
+
+    localStorage.setItem("language", lang);
+    localStorage.setItem("webAcademyLanguage", lang);
+
+    document.documentElement.lang = lang;
+
+    const t = authTranslations[lang];
+
+    document.getElementById("loginTab").textContent = t.login;
+    document.getElementById("registerTab").textContent = t.register;
+
+    document.querySelector("#loginForm h2").textContent = t.welcome;
+    document.querySelector("#loginForm > div:first-child p").textContent = t.loginText;
+
+    const loginLabels = document.querySelectorAll("#loginForm label");
+    loginLabels[0].textContent = t.identity;
+    loginLabels[1].textContent = t.password;
+
+    document.getElementById("loginIdentity").placeholder = t.identityPlaceholder;
+    document.getElementById("loginPassword").placeholder = t.passwordPlaceholder;
+
+    document.querySelector("#loginForm > button[type='submit']").textContent = t.login;
+
+    document.querySelector("#registerForm h2").textContent = t.create;
+    document.querySelector("#registerForm > div:first-child p").textContent = t.createText;
+
+    const registerLabels = document.querySelectorAll("#registerForm > div > label");
+
+    const fields = [
+        t.name, t.username, t.email, t.phone,
+        t.dob, t.gender, t.password, t.confirm
+    ];
+
+    registerLabels.forEach((label, index) => {
+        if (fields[index]) {
+            label.textContent = `${index + 1}. ${fields[index]}`;
+        }
+    });
+
+    document.getElementById("regName").placeholder = t.name;
+    document.getElementById("regUsername").placeholder = t.username;
+    document.getElementById("regEmail").placeholder = "example@email.com";
+    document.getElementById("regPhone").placeholder = "+8801XXXXXXXXX";
+    document.getElementById("regPassword").placeholder = t.minimum;
+    document.getElementById("regConfirmPassword").placeholder = t.confirmPlaceholder;
+
+    const genderSelect = document.getElementById("regGender");
+    genderSelect.options[0].text = t.chooseGender;
+    genderSelect.options[1].text = t.male;
+    genderSelect.options[2].text = t.female;
+    genderSelect.options[3].text = t.other;
+    genderSelect.options[4].text = t.privateGender;
+
+    document.querySelector("#terms + span").textContent = t.terms;
+
+    document.querySelector("#registerForm > button[type='submit']").textContent = t.createButton;
+
+    document.querySelector("#loginForm .text-center button").textContent = t.registerNow;
+    document.querySelector("#registerForm .text-center button").textContent = t.loginNow;
+
+    document.querySelector("#loginForm .text-center").firstChild.textContent = t.noAccount + " ";
+    document.querySelector("#registerForm .text-center").firstChild.textContent = t.haveAccount + " ";
+
+    document.querySelector('a[href="index.html"].text-indigo-600').textContent = t.back;
+
+    document.querySelectorAll("[data-language]").forEach(button => {
+        const active = button.dataset.language === lang;
+        button.classList.toggle("bg-indigo-600", active);
+        button.classList.toggle("text-white", active);
+    });
+
+}
+
+window.setLanguage = setLanguage;
+
+
+/* ========================================
+   3. IMAGE & GLASS SWITCH
+======================================== */
+
+function showForm(type) {
+
+    const isLogin = type === "login";
+
+    document.getElementById("loginForm")
+        .classList.toggle("hidden", !isLogin);
+
+    document.getElementById("registerForm")
+        .classList.toggle("hidden", isLogin);
+
+    // Images
+    document.getElementById("loginImage")
+        .classList.toggle("active", isLogin);
+
+    document.getElementById("registerImage")
+        .classList.toggle("active", !isLogin);
+
+    // Glass content
+    document.getElementById("loginGlass")
+        .classList.toggle("hidden", !isLogin);
+
+    document.getElementById("registerGlass")
+        .classList.toggle("hidden", isLogin);
+
+    // Tabs
+    document.getElementById("loginTab").className = isLogin
+        ? "py-3 rounded-lg font-semibold tab-active"
+        : "py-3 rounded-lg font-semibold tab-inactive";
+
+    document.getElementById("registerTab").className = !isLogin
+        ? "py-3 rounded-lg font-semibold tab-active"
+        : "py-3 rounded-lg font-semibold tab-inactive";
+
+    if (window.lucide) lucide.createIcons();
+
+}
+
+window.showForm = showForm;
+
+
+/* ========================================
+   4. PASSWORD SHOW / HIDE
+======================================== */
+
+function togglePassword(id, button) {
+
+    const input = document.getElementById(id);
+
+    input.type = input.type === "password" ? "text" : "password";
+
+    button.innerHTML = input.type === "password"
+        ? '<i data-lucide="eye" class="w-5 h-5"></i>'
+        : '<i data-lucide="eye-off" class="w-5 h-5"></i>';
+
+    if (window.lucide) lucide.createIcons();
+
+}
+
+window.togglePassword = togglePassword;
+
+
+/* ========================================
+   5. REGISTRATION SYSTEM
+======================================== */
+
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("regName").value.trim();
+    const username = document.getElementById("regUsername").value.trim();
+    const email = document.getElementById("regEmail").value.trim().toLowerCase();
+    const phone = document.getElementById("regPhone").value.trim();
+    const dob = document.getElementById("regDob").value;
+    const gender = document.getElementById("regGender").value;
+    const password = document.getElementById("regPassword").value;
+    const confirmPassword = document.getElementById("regConfirmPassword").value;
+
+    const message = document.getElementById("registerMessage");
+
+    let users = [];
+
+    try {
+        users = JSON.parse(localStorage.getItem("webAcademyUsers") || "[]");
+        if (!Array.isArray(users)) users = [];
+    } catch {
+        users = [];
+    }
+
+    if (password.length < 8) {
+        message.textContent = "Password must be at least 8 characters.";
+        message.className = "text-center text-sm text-red-500";
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        message.textContent = "দুটি Password মিলছে না!";
+        message.className = "text-center text-sm text-red-500";
+        return;
+    }
+
+    const usernameTaken = users.some(user =>
+        user.username &&
+        user.username.toLowerCase() === username.toLowerCase()
+    );
+
+    const emailTaken = users.some(user =>
+        user.email &&
+        user.email.toLowerCase() === email
+    );
+
+    const phoneTaken = users.some(user =>
+        user.phone === phone
+    );
+
+    if (usernameTaken || emailTaken) {
+        message.textContent = "এই Email অথবা Username আগে থেকেই ব্যবহার করা হয়েছে!";
+        message.className = "text-center text-sm text-red-500";
+        return;
+    }
+
+    if (phoneTaken) {
+        message.textContent = "এই Phone Number আগে থেকেই ব্যবহার করা হয়েছে!";
+        message.className = "text-center text-sm text-red-500";
+        return;
+    }
+
+    users.push({
+        name,
+        username,
+        email,
+        phone,
+        dob,
+        gender,
+        password,
+        createdAt: new Date().toISOString()
+    });
+
+    localStorage.setItem("webAcademyUsers", JSON.stringify(users));
+
+    message.textContent = "Registration Successful! এখন Login করো।";
+    message.className = "text-center text-sm text-green-600";
+
+    this.reset();
+
+    setTimeout(() => {
+        showForm("login");
+        document.getElementById("loginIdentity").value = email;
+    }, 800);
+
+});
+
+
+/* ========================================
+   6. LOGIN SYSTEM
+======================================== */
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const identity = document.getElementById("loginIdentity")
+        .value.trim().toLowerCase();
+
+    const password = document.getElementById("loginPassword").value;
+
+    const message = document.getElementById("loginMessage");
+
+    let users = [];
+
+    try {
+        users = JSON.parse(localStorage.getItem("webAcademyUsers") || "[]");
+        if (!Array.isArray(users)) users = [];
+    } catch {
+        users = [];
+    }
+
+    const user = users.find(u =>
+        (
+            (u.email && u.email.toLowerCase() === identity) ||
+            (u.username && u.username.toLowerCase() === identity)
+        ) &&
+        u.password === password
+    );
+
+    if (!user) {
+        message.textContent = "Email/Username অথবা Password ভুল!";
+        message.className = "text-center text-sm text-red-500";
+        return;
+    }
+
+    localStorage.setItem("webAcademyCurrentUser", JSON.stringify({
+        name: user.name,
+        username: user.username,
+        email: user.email
+    }));
+
+    window.location.href = "dashboard.html";
+
+});
+
+
+/* ========================================
+   7. INITIALIZATION
+======================================== */
+
+document.getElementById("regDob").max =
+    new Date().toISOString().split("T")[0];
+
+setLanguage(
+    localStorage.getItem("webAcademyLanguage") ||
+    localStorage.getItem("language") ||
+    "en"
+);
+
+updateThemeIcon();
+
+if (window.lucide) {
+    lucide.createIcons();
+}
+
+</script>
+
+</body>
+ </html>

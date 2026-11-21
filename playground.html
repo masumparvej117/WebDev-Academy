@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Code Playground | Web Academy BD</title>
+    <!-- Web Academy BD Favicon -->
+    <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Hind Siliguri", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-[1600px] mx-auto px-4 py-3 flex justify-between items-center gap-3">
+
+            <a href="index.html" class="text-xl font-bold text-indigo-600">
+                Web Academy BD
+            </a>
+
+            <div class="flex items-center gap-2">
+                <a href="courses.html"
+                   class="hidden sm:inline-flex px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                    Courses
+                </a>
+
+                <button id="themeToggle"
+                        class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                        aria-label="Toggle theme">
+                    <i data-lucide="moon"></i>
+                </button>
+
+                <button id="logoutBtn"
+                        class="px-3 py-2 bg-red-50 dark:bg-red-950 text-red-600 rounded-lg">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-[1600px] mx-auto px-4 py-6">
+
+        <!-- HEADER -->
+        <section class="mb-6">
+            <div class="flex flex-wrap justify-between items-center gap-4">
+                <div>
+                    <div class="text-sm text-indigo-600 font-semibold mb-2">
+                        LEARNING TOOLS / PLAYGROUND
+                    </div>
+
+                    <h1 class="text-2xl md:text-3xl font-bold">
+                        Live Code Playground
+                    </h1>
+
+                    <p class="text-slate-500 dark:text-slate-400 mt-2">
+                        HTML, CSS ও JavaScript লিখে সঙ্গে সঙ্গে ফলাফল দেখো।
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <button id="resetBtn"
+                            class="px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4 inline"></i>
+                        Reset
+                    </button>
+
+                    <button id="runBtn"
+                            class="px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold">
+                        <i data-lucide="play" class="w-4 h-4 inline"></i>
+                        Run Code
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDITOR TOOLBAR -->
+        <section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 mb-4 flex flex-wrap justify-between items-center gap-3">
+
+            <div class="flex flex-wrap gap-2">
+                <button data-tab="html"
+                        class="editor-tab px-4 py-2 rounded-lg bg-orange-100 text-orange-700 font-semibold">
+                    HTML
+                </button>
+
+                <button data-tab="css"
+                        class="editor-tab px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+                    CSS
+                </button>
+
+                <button data-tab="js"
+                        class="editor-tab px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+                    JavaScript
+                </button>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-slate-500">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                Live Editor
+            </div>
+        </section>
+
+        <!-- EDITOR + PREVIEW -->
+        <section class="grid xl:grid-cols-2 gap-5">
+
+            <!-- CODE EDITOR -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+
+                <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center gap-3">
+                    <h2 id="editorTitle" class="font-bold">HTML Editor</h2>
+
+                    <button id="copyBtn"
+                            class="text-sm px-3 py-2 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
+                        <i data-lucide="copy" class="w-4 h-4 inline"></i>
+                        Copy
+                    </button>
+                </div>
+
+                <div class="relative">
+                    <textarea id="htmlEditor"
+                              spellcheck="false"
+                              autocapitalize="off"
+                              autocomplete="off"
+                              class="editor-input w-full h-[500px] resize-y p-5 bg-slate-950 text-orange-300 font-mono text-sm leading-7 outline-none"
+                              placeholder="Write HTML code here..."></textarea>
+
+                    <textarea id="cssEditor"
+                              spellcheck="false"
+                              autocapitalize="off"
+                              autocomplete="off"
+                              class="editor-input hidden w-full h-[500px] resize-y p-5 bg-slate-950 text-green-300 font-mono text-sm leading-7 outline-none"
+                              placeholder="Write CSS code here..."></textarea>
+
+                    <textarea id="jsEditor"
+                              spellcheck="false"
+                              autocapitalize="off"
+                              autocomplete="off"
+                              class="editor-input hidden w-full h-[500px] resize-y p-5 bg-slate-950 text-yellow-300 font-mono text-sm leading-7 outline-none"
+                              placeholder="Write JavaScript code here..."></textarea>
+                </div>
+
+                <div class="px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex justify-between text-xs text-slate-500">
+                    <span id="editorLanguage">HTML</span>
+                    <span id="lineCount">1 line</span>
+                </div>
+            </div>
+
+            <!-- PREVIEW -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+
+                <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                    <h2 class="font-bold flex items-center gap-2">
+                        <i data-lucide="monitor" class="w-5 h-5 text-indigo-600"></i>
+                        Live Preview
+                    </h2>
+
+                    <button id="refreshBtn"
+                            class="text-sm px-3 py-2 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 inline"></i>
+                        Refresh
+                    </button>
+                </div>
+
+                <iframe id="previewFrame"
+                        title="Code preview"
+                        sandbox="allow-scripts"
+                        class="w-full h-[500px] bg-white"></iframe>
+
+                <div class="px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                    <span>Browser Preview</span>
+                    <span id="previewStatus">Ready</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- QUICK GUIDE -->
+        <section class="mt-8 grid md:grid-cols-3 gap-4">
+
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                <div class="text-orange-500 mb-3">
+                    <i data-lucide="code" class="w-7 h-7"></i>
+                </div>
+                <h3 class="font-bold mb-2">HTML</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    ওয়েবসাইটের Structure তৈরি করতে HTML ব্যবহার করো।
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                <div class="text-blue-500 mb-3">
+                    <i data-lucide="palette" class="w-7 h-7"></i>
+                </div>
+                <h3 class="font-bold mb-2">CSS</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    ওয়েবসাইটের Design ও Layout তৈরি করতে CSS ব্যবহার করো।
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                <div class="text-yellow-500 mb-3">
+                    <i data-lucide="zap" class="w-7 h-7"></i>
+                </div>
+                <h3 class="font-bold mb-2">JavaScript</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    ওয়েবসাইটে Interaction ও Functionality যোগ করো।
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 text-sm text-slate-500">
+        © 2026 Web Academy BD. Learn, Build & Grow.
+    </footer>
+
+    <script src="js/playground.js"></script>
+</body>
+</html>

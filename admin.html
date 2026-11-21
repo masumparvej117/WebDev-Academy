@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Web Academy BD</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Hind Siliguri", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <!-- Web Academy BD Favicon -->
+    <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans">
+
+    <!-- MOBILE HEADER -->
+    <header class="lg:hidden sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex justify-between items-center">
+        <a href="admin.html" class="font-bold text-indigo-600 text-lg">WABD Admin</a>
+
+        <div class="flex items-center gap-2">
+            <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme">
+                <i data-lucide="moon"></i>
+            </button>
+
+            <button id="mobileMenuBtn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="min-h-screen lg:flex">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-40 w-72 h-screen bg-slate-950 text-slate-300 flex flex-col -translate-x-full lg:translate-x-0 transition-transform duration-300">
+
+            <div class="p-6 border-b border-slate-800">
+                <a href="admin.html" class="text-2xl font-bold text-white">
+                    Web Academy <span class="text-indigo-400">BD</span>
+                </a>
+                <p class="text-xs text-slate-500 mt-2">ADMIN CONTROL PANEL</p>
+            </div>
+
+            <div class="p-5 flex items-center gap-3 border-b border-slate-800">
+                <div class="w-11 h-11 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div class="min-w-0">
+                    <p class="font-bold text-white">Administrator</p>
+                    <p id="adminEmail" class="text-xs text-slate-500 truncate">admin@example.com</p>
+                </div>
+            </div>
+
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+
+                <p class="px-3 py-2 text-xs text-slate-500 font-bold tracking-widest">MAIN MENU</p>
+
+                <button data-section="overview" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-600 text-white text-left">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    Overview
+                </button>
+
+                <button data-section="courses" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 text-left">
+                    <i data-lucide="book-open" class="w-5 h-5"></i>
+                    Manage Courses
+                </button>
+
+                <button data-section="students" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 text-left">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    Students
+                </button>
+
+                <button data-section="settings" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 text-left">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    Settings
+                </button>
+
+            </nav>
+
+            <div class="p-4 border-t border-slate-800 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 text-sm">
+                    <i data-lucide="external-link" class="w-5 h-5"></i>
+                    Visit Website
+                </a>
+
+                <button id="logoutBtn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-red-400 text-sm">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                    Logout
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- MOBILE OVERLAY -->
+        <div id="sidebarOverlay" class="hidden fixed inset-0 z-30 bg-black/50 lg:hidden"></div>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 min-w-0">
+
+            <!-- DESKTOP TOPBAR -->
+            <header class="hidden lg:flex sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-800 px-8 py-4 justify-between items-center">
+
+                <div>
+                    <h1 id="pageTitle" class="text-xl font-bold">Dashboard Overview</h1>
+                    <p class="text-xs text-slate-500 mt-1">Manage your learning platform</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span id="currentDate" class="text-sm text-slate-500"></span>
+
+                    <button id="themeToggleDesktop" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme">
+                        <i data-lucide="moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
+
+                <!-- ALERT -->
+                <div id="adminAlert" class="hidden mb-6 p-4 rounded-xl text-sm"></div>
+
+                <!-- OVERVIEW SECTION -->
+                <section id="overviewSection" class="admin-section">
+
+                    <div class="mb-8">
+                        <p class="text-indigo-600 font-semibold text-sm mb-2">ADMINISTRATION</p>
+                        <h2 class="text-2xl md:text-3xl font-bold">Dashboard Overview</h2>
+                        <p class="text-slate-500 mt-2">তোমার Learning Platform-এর সার্বিক অবস্থা।</p>
+                    </div>
+
+                    <!-- STATS -->
+                    <div class="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+
+                        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-slate-500">Total Students</span>
+                                <span class="p-2 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-600">
+                                    <i data-lucide="users"></i>
+                                </span>
+                            </div>
+                            <h3 id="totalStudents" class="text-3xl font-bold">0</h3>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-slate-500">Total Courses</span>
+                                <span class="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600">
+                                    <i data-lucide="book-open"></i>
+                                </span>
+                            </div>
+                            <h3 id="totalCourses" class="text-3xl font-bold">0</h3>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-slate-500">Free Courses</span>
+                                <span class="p-2 rounded-lg bg-green-100 dark:bg-green-950 text-green-600">
+                                    <i data-lucide="book-check"></i>
+                                </span>
+                            </div>
+                            <h3 id="freeCourses" class="text-3xl font-bold">0</h3>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-slate-500">Premium Courses</span>
+                                <span class="p-2 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-600">
+                                    <i data-lucide="crown"></i>
+                                </span>
+                            </div>
+                            <h3 id="premiumCourses" class="text-3xl font-bold">0</h3>
+                        </div>
+
+                    </div>
+
+                    <!-- QUICK ACTIONS -->
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+
+                        <div class="bg-gradient-to-r from-indigo-700 to-purple-700 rounded-2xl p-7 text-white">
+                            <div class="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center mb-5">
+                                <i data-lucide="plus-circle" class="w-7 h-7"></i>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-2">Add New Course</h3>
+                            <p class="text-indigo-100 text-sm mb-5">নতুন Web Development Course যুক্ত করো।</p>
+
+                            <button id="quickAddCourse" class="px-5 py-3 rounded-xl bg-white text-indigo-700 font-bold text-sm hover:bg-indigo-50">
+                                Create Course →
+                            </button>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-7">
+                            <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-950 text-green-600 flex items-center justify-center mb-5">
+                                <i data-lucide="users" class="w-7 h-7"></i>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-2">Student Management</h3>
+                            <p class="text-slate-500 text-sm mb-5">সকল Registered Student-এর তথ্য দেখো।</p>
+
+                            <button id="quickStudents" class="px-5 py-3 rounded-xl bg-slate-900 dark:bg-indigo-600 text-white font-bold text-sm">
+                                View Students →
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- RECENT COURSES -->
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+
+                        <div class="p-5 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+                            <h3 class="font-bold text-lg">Recent Courses</h3>
+                            <button data-section="courses" class="text-sm text-indigo-600 font-semibold">View All →</button>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-slate-50 dark:bg-slate-800 text-slate-500">
+                                    <tr>
+                                        <th class="p-4">Course</th>
+                                        <th class="p-4">Type</th>
+                                        <th class="p-4">Lessons</th>
+                                        <th class="p-4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentCourses"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- COURSES SECTION -->
+                <section id="coursesSection" class="admin-section hidden">
+
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                        <div>
+                            <p class="text-indigo-600 font-semibold text-sm mb-2">COURSE MANAGEMENT</p>
+                            <h2 class="text-2xl md:text-3xl font-bold">Manage Courses</h2>
+                            <p class="text-slate-500 mt-2">কোর্স Add, Edit ও Delete করো।</p>
+                        </div>
+
+                        <button id="addCourseBtn" class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold">
+                            <i data-lucide="plus"></i>
+                            Add New Course
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+
+                        <div class="p-4 border-b border-slate-200 dark:border-slate-800">
+                            <input id="courseSearch" type="search" placeholder="Search courses..."
+                                class="w-full md:max-w-sm px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[650px] text-sm text-left">
+                                <thead class="bg-slate-50 dark:bg-slate-800 text-slate-500">
+                                    <tr>
+                                        <th class="p-4">Course Name</th>
+                                        <th class="p-4">Category</th>
+                                        <th class="p-4">Type</th>
+                                        <th class="p-4">Lessons</th>
+                                        <th class="p-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="courseTable"></tbody>
+                            </table>
+                        </div>
+
+                        <div id="noCourses" class="hidden text-center p-10 text-slate-500">
+                            No courses found.
+                        </div>
+                    </div>
+
+                    <!-- COURSE FORM -->
+                    <div id="courseFormPanel" class="hidden mt-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 md:p-7">
+
+                        <div class="flex justify-between items-center gap-3 mb-6">
+                            <div>
+                                <h3 id="courseFormTitle" class="text-xl font-bold">Add New Course</h3>
+                                <p class="text-sm text-slate-500 mt-1">কোর্সের তথ্য পূরণ করো।</p>
+                            </div>
+
+                            <button id="closeCourseForm" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close form">
+                                <i data-lucide="x"></i>
+                            </button>
+                        </div>
+
+                        <form id="courseForm" class="grid md:grid-cols-2 gap-5">
+
+                            <input type="hidden" id="editCourseId">
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Course Title *</label>
+                                <input id="courseTitle" required maxlength="100" placeholder="HTML5 Complete Course"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Course Subtitle</label>
+                                <input id="courseSubtitle" maxlength="160" placeholder="Learn HTML from Beginner to Advanced"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Category *</label>
+                                <input id="courseCategory" required placeholder="Web Development"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Level</label>
+                                <select id="courseLevel" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="All Levels">All Levels</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Course Type</label>
+                                <select id="courseType" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none">
+                                    <option value="free">Free</option>
+                                    <option value="premium">Premium</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Duration</label>
+                                <input id="courseDuration" placeholder="5 Hours"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none">
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-semibold mb-2">Course Image URL</label>
+                                <input id="courseImage" type="url" placeholder="https://example.com/image.jpg"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none">
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-semibold mb-2">Course Description *</label>
+                                <textarea id="courseDescription" required rows="4" placeholder="Write course description..."
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none"></textarea>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-semibold mb-2">Lessons JSON</label>
+                                <textarea id="courseLessons" rows="10" spellcheck="false"
+                                    placeholder='[{"id":"html-1","title":"Introduction to HTML","duration":"20 min","explanation":"...","code":"...","output":"...","practice":"...","quiz":{"question":"...","options":["A","B","C"],"answer":0}}]'
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none font-mono text-xs"></textarea>
+
+                                <p class="text-xs text-slate-500 mt-2">
+                                    প্রতিটি Lesson-এর জন্য id, title, duration, explanation, code, output, practice এবং quiz field ব্যবহার করো। Premium course-এর Lesson ফাঁকা রাখতে পারো।
+                                </p>
+                            </div>
+
+                            <div class="md:col-span-2 flex flex-wrap gap-3">
+                                <button type="submit" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold">
+                                    Save Course
+                                </button>
+
+                                <button type="button" id="cancelCourseForm" class="px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 font-semibold">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </section>
+
+                <!-- STUDENTS SECTION -->
+                <section id="studentsSection" class="admin-section hidden">
+
+                    <div class="mb-8">
+                        <p class="text-indigo-600 font-semibold text-sm mb-2">USER MANAGEMENT</p>
+                        <h2 class="text-2xl md:text-3xl font-bold">Registered Students</h2>
+                        <p class="text-slate-500 mt-2">ওয়েবসাইটে নিবন্ধিত শিক্ষার্থীদের তালিকা।</p>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+
+                        <div class="p-4 border-b border-slate-200 dark:border-slate-800">
+                            <input id="studentSearch" type="search" placeholder="Search by name, username or email..."
+                                class="w-full md:max-w-md px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[700px] text-sm text-left">
+                                <thead class="bg-slate-50 dark:bg-slate-800 text-slate-500">
+                                    <tr>
+                                        <th class="p-4">Student</th>
+                                        <th class="p-4">Email</th>
+                                        <th class="p-4">Phone</th>
+                                        <th class="p-4">Gender</th>
+                                        <th class="p-4">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentTable"></tbody>
+                            </table>
+                        </div>
+
+                        <div id="noStudents" class="hidden text-center p-10 text-slate-500">
+                            No students found.
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- SETTINGS SECTION -->
+                <section id="settingsSection" class="admin-section hidden">
+
+                    <div class="mb-8">
+                        <p class="text-indigo-600 font-semibold text-sm mb-2">PLATFORM SETTINGS</p>
+                        <h2 class="text-2xl md:text-3xl font-bold">Admin Settings</h2>
+                        <p class="text-slate-500 mt-2">Admin Panel-এর সাধারণ সেটিংস।</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+
+                        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+                            <h3 class="font-bold text-lg mb-2">Platform Information</h3>
+                            <p class="text-sm text-slate-500 mb-5">ওয়েবসাইটের বর্তমান তথ্য।</p>
+
+                            <div class="space-y-4 text-sm">
+                                <div class="flex justify-between gap-3">
+                                    <span class="text-slate-500">Platform</span>
+                                    <strong>Web Academy BD</strong>
+                                </div>
+                                <div class="flex justify-between gap-3">
+                                    <span class="text-slate-500">Storage</span>
+                                    <strong>Browser LocalStorage</strong>
+                                </div>
+                                <div class="flex justify-between gap-3">
+                                    <span class="text-slate-500">Version</span>
+                                    <strong>Demo 1.0</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-900 border border-red-200 dark:border-red-900 rounded-2xl p-6">
+                            <h3 class="font-bold text-lg text-red-600 mb-2">Data Management</h3>
+                            <p class="text-sm text-slate-500 mb-5">
+                                LocalStorage-এর ডেটা Backup বা Restore করো।
+                            </p>
+
+                            <div class="flex flex-wrap gap-3">
+                                <button id="exportData" class="px-4 py-3 rounded-xl bg-indigo-600 text-white text-sm font-bold">
+                                    Export Backup
+                                </button>
+
+                                <label class="px-4 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 text-sm font-bold cursor-pointer">
+                                    Import Backup
+                                    <input id="importData" type="file" accept=".json,application/json" class="hidden">
+                                </label>
+                            </div>
+
+                            <p class="text-xs text-slate-500 mt-4">
+                                Backup-এ সংবেদনশীল তথ্য থাকতে পারে। নিরাপদ জায়গায় সংরক্ষণ করো।
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <footer class="text-center text-xs text-slate-500 py-10">
+                    © 2026 Web Academy BD Admin Panel
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

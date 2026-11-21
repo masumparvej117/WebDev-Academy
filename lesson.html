@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <title>Lesson | WebDev Academy</title>
+    <!-- Web Academy BD Favicon -->
+    <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "Hind Siliguri", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: Inter, "Hind Siliguri", sans-serif;
+            margin: 0;
+            background: #f8fafc;
+            color: #1e293b;
+            transition: background .3s, color .3s;
+        }
+
+        html.dark body { background: #0b1120; color: #e2e8f0; }
+
+        .navbar {
+            height: 68px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255,255,255,.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dark .navbar {
+            background: rgba(15,23,42,.94);
+            border-color: #263449;
+        }
+
+        .sidebar {
+            width: 290px;
+            position: fixed;
+            top: 68px;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            padding: 22px 16px 35px;
+            transition: transform .3s, background .3s;
+            z-index: 40;
+        }
+
+        .dark .sidebar {
+            background: #111c30;
+            border-color: #263449;
+        }
+
+        .main-content {
+            margin-left: 290px;
+            padding: 38px 6%;
+            max-width: 1250px;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 12px;
+            margin: 4px 0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #64748b;
+            transition: all .25s;
+            cursor: pointer;
+        }
+
+        .dark .lesson-item { color: #a6b3c8; }
+
+        .lesson-item:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            transform: translateX(4px);
+        }
+
+        .dark .lesson-item:hover { background: #1e3355; }
+
+        .lesson-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .dark .lesson-item.active { background: #1e3355; color: #60a5fa; }
+
+        .lesson-section {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            transition: all .3s;
+        }
+
+        .dark .lesson-section {
+            background: #111c30;
+            border-color: #263449;
+        }
+
+        .lesson-section:hover {
+            box-shadow: 0 12px 30px rgba(15,23,42,.05);
+        }
+
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 18px 0;
+        }
+
+        .code-header {
+            background: #1e293b;
+            padding: 12px 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .code-box pre {
+            padding: 20px;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            white-space: pre;
+        }
+
+        .copy-btn {
+            background: #334155;
+            padding: 6px 11px;
+            border-radius: 7px;
+            color: white;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .copy-btn:hover { background: #2563eb; }
+
+        .lesson-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 19px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all .25s;
+        }
+
+        .lesson-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(37,99,235,.18);
+        }
+
+        .primary-btn { background: #2563eb; color: white; }
+        .secondary-btn { background: #e2e8f0; color: #334155; }
+        .dark .secondary-btn { background: #263449; color: #e2e8f0; }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 68px 0 0;
+            background: rgba(0,0,0,.45);
+            z-index: 35;
+        }
+
+        .mobile-overlay.show { display: block; }
+
+        .progress-track {
+            height: 7px;
+            border-radius: 20px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .dark .progress-track { background: #263449; }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg,#2563eb,#06b6d4);
+            border-radius: 20px;
+            transition: width .5s;
+        }
+
+        .lesson-text {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #475569;
+        }
+
+        .dark .lesson-text { color: #bdc9da; }
+
+        .lesson-title {
+            font-size: clamp(28px,4vw,38px);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+            color: #1e40af;
+        }
+
+        .dark .info-box {
+            background: #172b49;
+            color: #bfdbfe;
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                transform: translateX(-100%);
+                box-shadow: 10px 0 30px rgba(0,0,0,.1);
+            }
+
+            .sidebar.open { transform: translateX(0); }
+
+            .main-content {
+                margin-left: 0;
+                padding: 28px 20px;
+            }
+        }
+
+        @media(max-width:600px) {
+            .lesson-section { padding: 18px; }
+            .main-content { padding: 25px 15px; }
+            .lesson-title { font-size: 28px; }
+            .desktop-only { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar flex items-center justify-between px-4 md:px-7">
+        <div class="flex items-center gap-3">
+            <button id="sidebarToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden" aria-label="Open lessons">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+                    <i data-lucide="code-2"></i>
+                </div>
+                <span class="font-extrabold text-lg">WebDev <span class="text-blue-600">Academy</span></span>
+            </a>
+        </div>
+
+        <div class="hidden md:flex items-center gap-5 text-sm font-medium">
+            <a href="courses.html" class="hover:text-blue-600">Courses</a>
+            <a href="dashboard.html" class="hover:text-blue-600">Dashboard</a>
+            <a href="playground.html" class="hover:text-blue-600">Playground</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme">
+                <i data-lucide="moon"></i>
+            </button>
+            <a href="profile.html" class="hidden sm:flex items-center gap-2 text-sm font-semibold">
+                <i data-lucide="user-circle"></i> Profile
+            </a>
+        </div>
+    </header>
+
+    <div id="mobileOverlay" class="mobile-overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside id="lessonSidebar" class="sidebar">
+        <a href="courses.html" class="flex items-center gap-2 text-sm font-semibold text-blue-600 mb-6">
+            <i data-lucide="arrow-left" size="17"></i> সব কোর্সে ফিরে যাও
+        </a>
+
+        <div class="mb-6">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">CURRENT COURSE</p>
+            <h2 id="sidebarCourseTitle" class="font-bold text-lg">HTML Fundamentals</h2>
+            <p class="text-xs text-slate-500 mt-1">Beginner Level</p>
+        </div>
+
+        <div class="mb-6">
+            <div class="flex justify-between text-xs mb-2">
+                <span class="font-semibold">Course Progress</span>
+                <span id="progressText">0%</span>
+            </div>
+            <div class="progress-track">
+                <div id="progressBar" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">LESSONS</p>
+
+        <div id="lessonList">
+            <button class="lesson-item active w-full text-left" data-lesson="0">
+                <i data-lucide="play-circle" size="17"></i>
+                <span>HTML Introduction</span>
+            </button>
+            <button class="lesson-item w-full text-left" data-lesson="1">
+                <i data-lucide="circle" size="17"></i>
+                <span>HTML Structure</span>
+            </button>
+            <button class="lesson-item w-full text-left" data-lesson="2">
+                <i data-lucide="circle" size="17"></i>
+                <span>HTML Headings</span>
+            </button>
+            <button class="lesson-item w-full text-left" data-lesson="3">
+                <i data-lucide="circle" size="17"></i>
+                <span>HTML Paragraphs</span>
+            </button>
+            <button class="lesson-item w-full text-left" data-lesson="4">
+                <i data-lucide="circle" size="17"></i>
+                <span>HTML Links</span>
+            </button>
+            <button class="lesson-item w-full text-left" data-lesson="5">
+                <i data-lucide="circle" size="17"></i>
+                <span>HTML Images</span>
+            </button>
+            <button class="lesson-item w-full text-left" data-lesson="6">
+                <i data-lucide="circle" size="17"></i>
+                <span>HTML Lists</span>
+            </button>
+        </div>
+
+        <div class="mt-8 p-4 rounded-xl bg-blue-50 dark:bg-slate-800">
+            <div class="flex items-center gap-2 text-blue-600 font-bold text-sm mb-2">
+                <i data-lucide="lightbulb" size="17"></i> Learning Tip
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-300 leading-relaxed">
+                প্রতিটি কোড নিজে লিখে Practice করো। এতে দ্রুত শিখতে পারবে।
+            </p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="flex items-center gap-2 text-sm text-slate-400 mb-5">
+            <a href="courses.html" class="hover:text-blue-600">Courses</a>
+            <i data-lucide="chevron-right" size="15"></i>
+            <span id="breadcrumbCourse">HTML Fundamentals</span>
+            <i data-lucide="chevron-right" size="15"></i>
+            <span class="text-blue-600">Lesson</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">FREE COURSE</span>
+            <span class="text-sm text-slate-400">Beginner Level</span>
+            <span class="text-sm text-slate-400">•</span>
+            <span id="lessonDuration" class="text-sm text-slate-400">10 min read</span>
+        </div>
+
+        <h1 id="lessonTitle" class="lesson-title mb-4">HTML Introduction</h1>
+
+        <p id="lessonSubtitle" class="lesson-text mb-7">
+            HTML কী এবং কীভাবে একটি ওয়েবসাইটের কাঠামো তৈরি করতে হয় তা শিখে নাও।
+        </p>
+
+        <div class="flex items-center gap-3 mb-8 text-sm text-slate-500">
+            <div class="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600">
+                <i data-lucide="graduation-cap"></i>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-700 dark:text-slate-200">WebDev Academy</p>
+                <p class="text-xs">Learning Materials</p>
+            </div>
+        </div>
+
+        <!-- LESSON BODY -->
+        <article id="lessonContent">
+
+            <section class="lesson-section">
+                <h2 class="text-xl font-bold mb-4">HTML কী?</h2>
+                <p class="lesson-text mb-4">
+                    HTML এর পূর্ণরূপ হলো HyperText Markup Language। এটি ওয়েব পেজের মূল কাঠামো তৈরি করতে ব্যবহৃত হয়।
+                </p>
+                <p class="lesson-text">
+                    একটি ওয়েবসাইটে Heading, Paragraph, Image, Link, Button ইত্যাদি যোগ করার জন্য HTML ব্যবহার করা হয়।
+                </p>
+                <div class="info-box">
+                    <strong>মনে রাখবে:</strong> HTML কোনো Programming Language নয়। এটি একটি Markup Language।
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="text-xl font-bold mb-4">প্রথম HTML কোড</h2>
+                <p class="lesson-text mb-3">
+                    নিচে একটি সাধারণ HTML ডকুমেন্টের উদাহরণ দেওয়া হলো।
+                </p>
+
+                <div class="code-box">
+                    <div class="code-header">
+                        <span>index.html</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i data-lucide="copy" size="14" class="inline"></i> Copy
+                        </button>
+                    </div>
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My First Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;p&gt;Welcome to my website.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="text-xl font-bold mb-4">কোডের ব্যাখ্যা</h2>
+
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-bold text-blue-600 mb-1">&lt;!DOCTYPE html&gt;</h3>
+                        <p class="lesson-text">ব্রাউজারকে জানায় যে এটি HTML5 ডকুমেন্ট।</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-blue-600 mb-1">&lt;html&gt;</h3>
+                        <p class="lesson-text">HTML ডকুমেন্টের মূল Element।</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-blue-600 mb-1">&lt;head&gt;</h3>
+                        <p class="lesson-text">পেজের Metadata এবং Title এখানে থাকে।</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-blue-600 mb-1">&lt;body&gt;</h3>
+                        <p class="lesson-text">ওয়েবসাইটে দৃশ্যমান সব Content এখানে থাকে।</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="text-xl font-bold mb-4">Practice Task</h2>
+                <p class="lesson-text mb-4">
+                    এবার নিজে একটি HTML ফাইল তৈরি করো এবং নিচের কাজগুলো সম্পন্ন করো।
+                </p>
+                <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex gap-2"><i data-lucide="check-circle" class="text-green-500 shrink-0"></i> একটি HTML ডকুমেন্ট তৈরি করো।</li>
+                    <li class="flex gap-2"><i data-lucide="check-circle" class="text-green-500 shrink-0"></i> একটি Heading যোগ করো।</li>
+                    <li class="flex gap-2"><i data-lucide="check-circle" class="text-green-500 shrink-0"></i> একটি Paragraph লেখো।</li>
+                    <li class="flex gap-2"><i data-lucide="check-circle" class="text-green-500 shrink-0"></i> ব্রাউজারে ফাইলটি Open করো।</li>
+                </ul>
+
+                <a href="playground.html" class="lesson-btn primary-btn mt-6">
+                    <i data-lucide="code-2" size="17"></i> Open Playground
+                </a>
+            </section>
+
+        </article>
+
+        <!-- LESSON COMPLETE -->
+        <div class="lesson-section flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <h3 class="font-bold text-lg">এই Lesson শেষ করেছো?</h3>
+                <p class="text-sm text-slate-500 mt-1">Complete বাটনে ক্লিক করে অগ্রগতি সংরক্ষণ করো।</p>
+            </div>
+            <button id="completeLessonBtn" class="lesson-btn primary-btn">
+                <i data-lucide="check-circle" size="17"></i> Mark as Complete
+            </button>
+        </div>
+
+        <!-- PREVIOUS NEXT -->
+        <div class="flex items-center justify-between gap-3 mt-8 mb-10">
+            <button id="previousLesson" class="lesson-btn secondary-btn">
+                <i data-lucide="arrow-left" size="17"></i>
+                <span class="desktop-only">Previous</span>
+            </button>
+
+            <button id="nextLesson" class="lesson-btn primary-btn">
+                <span class="desktop-only">Next Lesson</span>
+                <i data-lucide="arrow-right" size="17"></i>
+            </button>
+        </div>
+
+        <footer class="border-t border-slate-200 dark:border-slate-700 pt-6 text-center text-sm text-slate-400">
+            © 2026 WebDev Academy. Learn. Practice. Build.
+        </footer>
+
+    </main>
+
+    <script src="js/lesson.js"></script>
+    <script>
+        if (window.lucide) lucide.createIcons();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pricing & Membership | Web Academy BD</title>
+    <meta name="description" content="Web Academy BD-এর Free এবং Premium Membership Plan সম্পর্কে জানুন।">
+
+    <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236366f1'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white'%3EW%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Hind Siliguri", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Hind Siliguri", sans-serif;
+        }
+
+        .plan-card {
+            transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 55px rgba(79, 70, 229, .16);
+        }
+
+        .premium-card:hover {
+            box-shadow: 0 25px 60px rgba(124, 58, 237, .25);
+        }
+
+        .image-wrap {
+            overflow: hidden;
+            border-radius: 18px;
+        }
+
+        .image-wrap img {
+            transition: transform .6s ease, filter .5s ease;
+        }
+
+        .image-wrap:hover img {
+            transform: scale(1.09);
+            filter: brightness(1.08);
+        }
+
+        .hover-btn {
+            transition: all .3s ease;
+        }
+
+        .hover-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(79, 70, 229, .25);
+        }
+
+        .faq-answer {
+            display: none;
+            animation: fadeIn .3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-icon {
+            transition: transform .3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-image {
+            animation: floatImage 5s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center gap-3">
+
+            <a href="index.html" class="text-xl md:text-2xl font-extrabold text-indigo-600">
+                Web Academy BD
+            </a>
+
+            <div class="hidden md:flex items-center gap-7 text-sm font-semibold">
+                <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+                <a href="courses.html" class="hover:text-indigo-600 transition">Courses</a>
+                <a href="playground.html" class="hover:text-indigo-600 transition">Playground</a>
+                <a href="pricing.html" class="text-indigo-600">Pricing</a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="themeToggle" class="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle theme">
+                    <i data-lucide="moon"></i>
+                </button>
+
+                <a id="accountBtn" href="auth.html"
+                   class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold transition hover:-translate-y-0.5">
+                    Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="relative overflow-hidden bg-slate-950 text-white">
+
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                <div class="absolute -top-24 -left-20 w-96 h-96 bg-indigo-600 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-32 right-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+
+                <div class="reveal">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-indigo-200 text-sm mb-6">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        SIMPLE & TRANSPARENT MEMBERSHIP
+                    </span>
+
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                        Choose Your
+                        <span class="text-indigo-400">Learning Plan</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-lg leading-8 max-w-xl">
+                        নিজের শেখার লক্ষ্য অনুযায়ী সঠিক Membership বেছে নাও।
+                        বিনামূল্যে শেখা শুরু করো এবং ভবিষ্যতে Premium সুবিধাও উপভোগ করো।
+                    </p>
+
+                    <a href="#plans"
+                       class="inline-flex items-center gap-3 mt-8 px-7 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-bold hover-btn">
+                        Explore Plans
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </a>
+
+                    <div class="flex flex-wrap gap-6 mt-10 text-sm text-slate-300">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="text-green-400 w-5"></i>
+                            Free Learning
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="shield-check" class="text-green-400 w-5"></i>
+                            No Payment Required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="relative reveal">
+                    <div class="hero-image relative">
+                        <div class="absolute -inset-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl blur-xl opacity-30"></div>
+
+                        <img
+                            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1100&q=85"
+                            alt="Web Development Workspace"
+                            class="relative w-full h-72 md:h-[430px] object-cover rounded-3xl shadow-2xl border border-white/10"
+                        >
+                    </div>
+
+                    <div class="absolute -bottom-5 -left-3 md:-left-6 bg-white text-slate-900 p-4 rounded-2xl shadow-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-green-100 text-green-600 p-3 rounded-xl">
+                                <i data-lucide="code-2"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Learn & Build</p>
+                                <p class="text-xs text-slate-500">Your Coding Journey</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PLANS -->
+        <section id="plans" class="max-w-7xl mx-auto px-4 py-20">
+
+            <div class="text-center mb-14 reveal">
+                <p class="text-indigo-600 font-bold mb-3 tracking-widest text-sm">MEMBERSHIP PLANS</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4">
+                    Find Your Perfect Plan
+                </h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg">
+                    শেখা শুরু করতে এখনই কোনো টাকা খরচ করতে হবে না।
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+                <!-- FREE PLAN -->
+                <div class="plan-card reveal relative bg-white dark:bg-slate-900 border-2 border-green-500 rounded-3xl p-6 md:p-9 shadow-xl">
+
+                    <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-green-100 dark:bg-green-950 text-green-700 dark:text-green-400 text-sm font-bold mb-6">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        Available Now
+                    </span>
+
+                    <div class="image-wrap mb-7">
+                        <img
+                            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
+                            alt="Free Online Learning"
+                            class="w-full h-52 object-cover"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <h3 class="text-3xl font-extrabold mb-2">Free Plan</h3>
+
+                    <p class="text-slate-500 dark:text-slate-400 mb-6">
+                        নতুন শিক্ষার্থী ও Beginners-দের জন্য।
+                    </p>
+
+                    <div class="flex items-end gap-2 mb-2">
+                        <span class="text-5xl font-extrabold">৳০</span>
+                        <span class="text-slate-500 mb-2">/ Forever</span>
+                    </div>
+
+                    <p class="text-sm text-green-600 font-bold mb-7">
+                        সম্পূর্ণ বিনামূল্যে
+                    </p>
+
+                    <a href="courses.html"
+                       class="hover-btn block w-full text-center py-4 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold">
+                        Start Learning Free →
+                    </a>
+
+                    <div class="border-t border-slate-200 dark:border-slate-700 mt-8 pt-7">
+                        <h4 class="font-extrabold mb-5">Free Plan Includes:</h4>
+
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                Free Courses Access
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                Course Lessons & Tutorials
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                HTML, CSS & JavaScript Learning
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                Live Code Playground
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                Learning Progress Tracking
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                Student Dashboard
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="check" class="text-green-500 shrink-0"></i>
+                                Personal Profile
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- PREMIUM PLAN -->
+                <div class="plan-card premium-card reveal relative bg-slate-900 border border-indigo-500 rounded-3xl p-6 md:p-9 text-white shadow-xl overflow-hidden">
+
+                    <div class="absolute -top-16 -right-16 w-48 h-48 bg-purple-600/30 blur-3xl rounded-full"></div>
+
+                    <span class="relative inline-flex items-center gap-2 px-3 py-2 rounded-full bg-indigo-500/20 text-indigo-300 text-sm font-bold mb-6">
+                        <i data-lucide="crown" class="w-4 h-4"></i>
+                        Coming Soon
+                    </span>
+
+                    <div class="image-wrap relative mb-7">
+                        <img
+                            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85"
+                            alt="Professional Team Learning"
+                            class="w-full h-52 object-cover"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-indigo-950/20"></div>
+                    </div>
+
+                    <h3 class="relative text-3xl font-extrabold mb-2">Premium Plan</h3>
+
+                    <p class="relative text-slate-400 mb-6">
+                        Advanced শিক্ষার্থী ও Professional Developer-দের জন্য।
+                    </p>
+
+                    <div class="relative flex items-end gap-2 mb-2">
+                        <span class="text-5xl font-extrabold">৳—</span>
+                        <span class="text-slate-400 mb-2">/ Price not announced</span>
+                    </div>
+
+                    <p class="relative text-sm text-indigo-300 font-bold mb-7">
+                        মূল্য ও সুবিধা পরবর্তীতে ঘোষণা করা হবে।
+                    </p>
+
+                    <button type="button" disabled
+                            class="relative block w-full py-4 rounded-xl bg-indigo-600/50 text-white/70 font-bold cursor-not-allowed">
+                        Premium Coming Soon
+                    </button>
+
+                    <div class="relative border-t border-slate-700 mt-8 pt-7">
+                        <h4 class="font-extrabold mb-5">Planned Premium Benefits:</h4>
+
+                        <ul class="space-y-4 text-sm text-slate-300">
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Advanced Premium Courses
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Project-Based Learning
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Real-World Projects
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Advanced Coding Challenges
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Downloadable Learning Resources
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Certificate Opportunities
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="crown" class="text-indigo-400 shrink-0"></i>
+                                Additional Learning Support
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- COMPARISON -->
+        <section class="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 py-20">
+
+                <div class="text-center mb-12 reveal">
+                    <p class="text-indigo-600 font-bold mb-2 tracking-widest text-sm">COMPARE PLANS</p>
+                    <h2 class="text-3xl md:text-4xl font-extrabold">Plan Comparison</h2>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg reveal">
+                    <table class="w-full min-w-[600px] text-sm text-left">
+                        <thead class="bg-slate-100 dark:bg-slate-800">
+                            <tr>
+                                <th class="p-5 font-bold">Features</th>
+                                <th class="p-5 text-center font-bold text-green-600">Free</th>
+                                <th class="p-5 text-center font-bold text-indigo-600">Premium</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                            <tr>
+                                <td class="p-4">Free Courses</td>
+                                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Basic Tutorials</td>
+                                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Live Playground</td>
+                                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Premium Courses</td>
+                                <td class="p-4 text-center text-slate-400">—</td>
+                                <td class="p-4 text-center text-indigo-600 font-bold">Planned</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Advanced Projects</td>
+                                <td class="p-4 text-center text-slate-400">—</td>
+                                <td class="p-4 text-center text-indigo-600 font-bold">Planned</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Downloadable Resources</td>
+                                <td class="p-4 text-center text-slate-400">—</td>
+                                <td class="p-4 text-center text-indigo-600 font-bold">Planned</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Certificates</td>
+                                <td class="p-4 text-center text-slate-400">—</td>
+                                <td class="p-4 text-center text-indigo-600 font-bold">Planned</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-xs text-slate-500 mt-5">
+                    Premium-এর সুবিধাগুলো পরিকল্পনাধীন। চালু হওয়ার আগে চূড়ান্ত সুবিধা ও শর্ত ঘোষণা করা হবে।
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="max-w-4xl mx-auto px-4 py-20">
+
+            <div class="text-center mb-12 reveal">
+                <p class="text-indigo-600 font-bold mb-2 tracking-widest text-sm">FAQ</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold">
+                    Frequently Asked Questions
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+
+                <div class="faq-item reveal bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-question w-full p-5 text-left flex justify-between items-center gap-3 font-bold">
+                        Web Academy BD কি বিনামূল্যে ব্যবহার করা যাবে?
+                        <i data-lucide="plus" class="faq-icon shrink-0"></i>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-sm text-slate-500 dark:text-slate-400 leading-7">
+                        হ্যাঁ। Free Plan ব্যবহার করে বিনামূল্যে উপলব্ধ কোর্সগুলো শেখা যাবে।
+                    </div>
+                </div>
+
+                <div class="faq-item reveal bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-question w-full p-5 text-left flex justify-between items-center gap-3 font-bold">
+                        Premium Course কখন চালু হবে?
+                        <i data-lucide="plus" class="faq-icon shrink-0"></i>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-sm text-slate-500 dark:text-slate-400 leading-7">
+                        Premium Course এখনো প্রস্তুত হচ্ছে। চালু হওয়ার তারিখ পরবর্তীতে জানানো হবে।
+                    </div>
+                </div>
+
+                <div class="faq-item reveal bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-question w-full p-5 text-left flex justify-between items-center gap-3 font-bold">
+                        Premium-এর মূল্য কত হবে?
+                        <i data-lucide="plus" class="faq-icon shrink-0"></i>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-sm text-slate-500 dark:text-slate-400 leading-7">
+                        Premium-এর মূল্য এখনো নির্ধারণ করা হয়নি। মূল্য ঘোষণা হলে এই পেজে জানানো হবে।
+                    </div>
+                </div>
+
+                <div class="faq-item reveal bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-question w-full p-5 text-left flex justify-between items-center gap-3 font-bold">
+                        Premium-এর জন্য এখনই কি Payment করতে হবে?
+                        <i data-lucide="plus" class="faq-icon shrink-0"></i>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-sm text-slate-500 dark:text-slate-400 leading-7">
+                        না। Premium এখনো চালু হয়নি। এই মুহূর্তে কোনো Payment নেওয়া হচ্ছে না।
+                    </div>
+                </div>
+
+                <div class="faq-item reveal bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-question w-full p-5 text-left flex justify-between items-center gap-3 font-bold">
+                        কীভাবে শেখা শুরু করব?
+                        <i data-lucide="plus" class="faq-icon shrink-0"></i>
+                    </button>
+                    <div class="faq-answer px-5 pb-5 text-sm text-slate-500 dark:text-slate-400 leading-7">
+                        একটি অ্যাকাউন্ট তৈরি করে Login করো। এরপর Courses পেজ থেকে পছন্দের Free Course শুরু করতে পারবে।
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="max-w-6xl mx-auto px-4 pb-20">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-700 to-purple-700 p-8 md:p-14 text-center text-white reveal">
+
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-300/20 rounded-full blur-3xl"></div>
+
+                <div class="relative">
+                    <div class="inline-flex items-center justify-center bg-white/15 p-4 rounded-2xl mb-6">
+                        <i data-lucide="rocket" class="w-9 h-9"></i>
+                    </div>
+
+                    <h2 class="text-3xl md:text-5xl font-extrabold mb-5">
+                        Start Your Coding Journey Today!
+                    </h2>
+
+                    <p class="text-indigo-100 max-w-xl mx-auto leading-8 mb-8">
+                        অপেক্ষা না করে আজ থেকেই Programming শেখা শুরু করো।
+                        নিজের দক্ষতা তৈরি করো এবং নতুন কিছু বানাও।
+                    </p>
+
+                    <a href="courses.html"
+                       class="inline-flex px-8 py-4 rounded-xl bg-white text-indigo-700 font-extrabold hover:bg-indigo-50 hover-btn">
+                        Explore Free Courses →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-300">
+
+        <div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-10">
+
+            <div>
+                <h3 class="text-2xl font-extrabold text-white mb-4">
+                    Web Academy BD
+                </h3>
+                <p class="text-sm leading-8 text-slate-400 max-w-sm">
+                    Learn Web Development, Build Projects and Grow Your Skills.
+                    আমাদের সাথে নিজের Coding Journey শুরু করো।
+                </p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-white mb-4">Quick Links</h3>
+                <div class="space-y-3 text-sm">
+                    <a href="index.html" class="block hover:text-indigo-400 transition">Home</a>
+                    <a href="courses.html" class="block hover:text-indigo-400 transition">Courses</a>
+                    <a href="pricing.html" class="block hover:text-indigo-400 transition">Pricing</a>
+                    <a href="dashboard.html" class="block hover:text-indigo-400 transition">Dashboard</a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-white mb-4">Learning Tools</h3>
+                <div class="space-y-3 text-sm">
+                    <a href="playground.html" class="block hover:text-indigo-400 transition">Code Playground</a>
+                    <a href="profile.html" class="block hover:text-indigo-400 transition">My Profile</a>
+                    <a href="auth.html" class="block hover:text-indigo-400 transition">Login / Register</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="border-t border-slate-800 text-center py-6 text-sm text-slate-500">
+            © 2026 Web Academy BD. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- PRICING JS -->
+    <script src="js/pricing.js"></script>
+
+    <!-- PAGE INTERACTIONS -->
+    <script>
+        // Lucide Icons
+        function refreshIcons() {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        refreshIcons();
+
+        // Theme Toggle
+        const themeToggle = document.getElementById("themeToggle");
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.classList.contains("dark");
+            themeToggle.innerHTML = isDark
+                ? '<i data-lucide="sun"></i>'
+                : '<i data-lucide="moon"></i>';
+            refreshIcons();
+        }
+
+        const savedTheme = localStorage.getItem("webAcademyTheme");
+
+        if (savedTheme === "dark" ||
+            (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+        }
+
+        updateThemeIcon();
+
+        themeToggle.addEventListener("click", () => {
+            const isDark = document.documentElement.classList.toggle("dark");
+            localStorage.setItem("webAcademyTheme", isDark ? "dark" : "light");
+            updateThemeIcon();
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll(".faq-question").forEach(button => {
+            button.addEventListener("click", () => {
+                const currentItem = button.closest(".faq-item");
+                const wasOpen = currentItem.classList.contains("active");
+
+                document.querySelectorAll(".faq-item").forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                if (!wasOpen) {
+                    currentItem.classList.add("active");
+                }
+            });
+        });
+
+        // Account Button
+        const accountBtn = document.getElementById("accountBtn");
+
+        try {
+            const currentUser = JSON.parse(
+                localStorage.getItem("webAcademyCurrentUser")
+            );
+
+            if (currentUser && (currentUser.name || currentUser.username)) {
+                accountBtn.textContent =
+                    currentUser.name || currentUser.username;
+                accountBtn.href = "profile.html";
+            }
+        } catch (error) {
+            console.warn("Account information unavailable.");
+        }
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll(".reveal");
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12
+            });
+
+            revealElements.forEach(element => observer.observe(element));
+        } else {
+            revealElements.forEach(element => element.classList.add("show"));
+        }
+    </script>
+
+</body>
+</html>

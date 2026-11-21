@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Book | Web Academy BD</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: "class" };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: "Hind Siliguri", sans-serif; }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 18px;
+      border-radius: 12px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+    }
+    .chapter { scroll-margin-top: 100px; }
+    @media print {
+      body { background: white !important; color: #111827 !important; }
+      .no-print { display: none !important; }
+      .chapter {
+        page-break-before: always;
+        break-before: page;
+        padding: 20px 0;
+      }
+      .chapter:first-child { page-break-before: auto; break-before: auto; }
+      pre { white-space: pre-wrap; print-color-adjust: exact; }
+      .book-content { max-width: 100% !important; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-white">
+
+  <nav class="no-print sticky top-0 z-40 bg-white dark:bg-slate-900 border-b dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3">
+      <a href="courses.html" class="font-extrabold text-xl text-indigo-600">
+        Web Academy BD
+      </a>
+
+      <div class="flex gap-2">
+        <button id="themeToggle" class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+          Theme
+        </button>
+        <button id="downloadBtn" class="px-4 py-2 rounded-lg bg-indigo-600 text-white font-bold">
+          Download PDF
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="book-content max-w-5xl mx-auto px-4 py-8">
+
+    <section id="bookCover" class="bg-gradient-to-br from-indigo-950 via-violet-900 to-purple-950 text-white rounded-3xl p-8 md:p-16 min-h-80 flex flex-col justify-center">
+      <p class="uppercase tracking-widest text-indigo-200 font-bold">
+        Web Academy BD • Complete Guide
+      </p>
+      <h1 id="bookTitle" class="text-4xl md:text-6xl font-extrabold mt-6">
+        Course Book
+      </h1>
+      <p id="bookSubtitle" class="text-indigo-100 text-lg mt-4">
+        Learn • Practice • Build
+      </p>
+      <p id="bookMeta" class="mt-10 text-indigo-200"></p>
+    </section>
+
+    <section class="no-print bg-white dark:bg-slate-900 rounded-2xl p-6 mt-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-4">সূচিপত্র / Table of Contents</h2>
+      <div id="tableOfContents" class="grid sm:grid-cols-2 gap-3"></div>
+    </section>
+
+    <div id="bookContent" class="mt-8 space-y-6"></div>
+
+    <div id="emptyMessage" class="hidden text-center py-16">
+      <h2 class="text-2xl font-bold">বই পাওয়া যায়নি</h2>
+      <p class="mt-2 text-slate-500">কোর্স পেজে ফিরে গিয়ে আবার চেষ্টা করো।</p>
+      <a href="courses.html" class="inline-block mt-5 px-6 py-3 bg-indigo-600 text-white rounded-xl">
+        Back to Courses
+      </a>
+    </div>
+
+  </main>
+
+  <script src="js/courses.js"></script>
+  <script src="js/book.js"></script>
+</body>
+</html>

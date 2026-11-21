@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Web Academy BD course details, curriculum and lessons.">
+  <meta name="theme-color" content="#4f46e5">
+  <title>Course Details | Web Academy BD</title>
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236366f1'/%3E%3Ctext x='50' y='69' font-size='65' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Hind Siliguri", "Arial", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    .course-gallery img {
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .course-gallery img:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(79, 70, 229, .2);
+    }
+
+    .hero-image {
+      animation: imageFade .7s ease;
+    }
+
+    @keyframes imageFade {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .lesson-card {
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-2px);
+    }
+
+    img {
+      background: #e2e8f0;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-white font-sans">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+
+      <a href="index.html" class="text-2xl font-extrabold text-indigo-600">
+        Web Academy BD
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="courses.html" class="hidden sm:block font-semibold hover:text-indigo-600">
+          All Courses
+        </a>
+
+        <button id="themeToggle"
+          class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800"
+          aria-label="Toggle theme">
+          <i data-lucide="moon"></i>
+        </button>
+
+        <button id="logoutBtn"
+          class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-semibold">
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-7xl mx-auto px-4 pt-7">
+    <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+      <a href="index.html" class="hover:text-indigo-600">Home</a>
+      <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="courses.html" class="hover:text-indigo-600">Courses</a>
+      <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <span id="breadcrumbTitle" class="text-indigo-600 font-semibold">
+        Course Details
+      </span>
+    </div>
+  </div>
+
+  <!-- COURSE HERO -->
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <div class="bg-gradient-to-br from-indigo-700 via-violet-700 to-purple-800 text-white rounded-3xl overflow-hidden">
+
+      <div class="p-7 md:p-12 grid md:grid-cols-5 gap-8 items-center">
+
+        <div class="md:col-span-3">
+
+          <span id="courseType"
+            class="inline-block bg-white/20 rounded-full px-4 py-2 text-sm font-bold">
+            FREE COURSE
+          </span>
+
+          <h1 id="courseTitle" class="text-3xl md:text-5xl font-extrabold mt-5">
+            Loading Course...
+          </h1>
+
+          <p id="courseSubtitle" class="text-indigo-100 mt-3 text-lg"></p>
+
+          <p id="courseDescription"
+            class="text-indigo-100 mt-5 leading-7 max-w-2xl"></p>
+
+          <div class="flex flex-wrap gap-5 mt-7 text-sm">
+
+            <span class="flex items-center gap-2">
+              <i data-lucide="book-open" class="w-5 h-5"></i>
+              <span id="courseLessonCount">0 Lessons</span>
+            </span>
+
+            <span class="flex items-center gap-2">
+              <i data-lucide="signal" class="w-5 h-5"></i>
+              <span id="courseLevel">Beginner</span>
+            </span>
+
+            <span class="flex items-center gap-2">
+              <i data-lucide="award" class="w-5 h-5"></i>
+              Practical Learning
+            </span>
+
+          </div>
+        </div>
+
+        <!-- COURSE IMAGE -->
+        <div class="md:col-span-2 flex justify-center">
+
+          <div class="w-full max-w-sm p-2 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
+
+            <img
+              id="courseImage"
+              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=85"
+              alt="Web Development Course"
+              class="hero-image w-full h-64 md:h-72 object-cover rounded-2xl"
+              onerror="this.src='https://placehold.co/900x600/312e81/ffffff?text=Web+Academy+BD'">
+
+            <p id="courseImageCaption"
+              class="text-center text-sm font-semibold text-white mt-3 mb-2">
+              Learn • Practice • Build
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSE IMAGE GALLERY -->
+  <section class="max-w-7xl mx-auto px-4 pb-10">
+
+    <div class="mb-6">
+      <h2 class="text-2xl md:text-3xl font-extrabold">
+        Explore Course Images
+      </h2>
+
+      <p class="text-slate-500 dark:text-slate-400 mt-1">
+        কোর্স সম্পর্কিত ছবি ও প্র্যাকটিক্যাল লার্নিং
+      </p>
+    </div>
+
+    <div class="course-gallery grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80"
+          alt="Developer Workspace" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Developer Workspace</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80"
+          alt="Programming Code" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Programming</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80"
+          alt="Code Editor" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Code Editor</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+          alt="JavaScript Coding" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">JavaScript Coding</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=600&q=80"
+          alt="CSS Web Design" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">CSS Web Design</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"
+          alt="Online Learning" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Online Learning</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+          alt="Team Collaboration" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Team Collaboration</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80"
+          alt="Technology Team" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Technology Team</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=600&q=80"
+          alt="Developer Practice" loading="lazy"
+          class="w-full h-36 sm:h-44 object-cover">
+        <p class="p-3 text-sm font-semibold">Developer Practice</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-4 pb-16">
+
+    <div class="grid lg:grid-cols-3 gap-8">
+
+      <!-- LESSON LIST -->
+      <section class="lg:col-span-2">
+
+        <div class="flex items-center justify-between gap-4 mb-6">
+
+          <div>
+            <h2 class="text-2xl md:text-3xl font-extrabold">
+              Course Curriculum
+            </h2>
+
+            <p class="text-slate-500 dark:text-slate-400 mt-1">
+              কোর্সের সব অধ্যায় ও লেসন
+            </p>
+          </div>
+
+          <span id="totalLessonsBadge"
+            class="px-4 py-2 rounded-xl bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300 text-sm font-bold">
+            0 Lessons
+          </span>
+
+        </div>
+
+        <!-- DYNAMIC LESSONS -->
+        <div id="lessonList" class="space-y-4"></div>
+
+        <!-- EMPTY STATE -->
+        <div id="noLessons"
+          class="hidden text-center bg-white dark:bg-slate-900 rounded-2xl p-10 border border-slate-200 dark:border-slate-800">
+
+          <i data-lucide="book-x" class="w-12 h-12 mx-auto text-slate-400"></i>
+
+          <h3 class="text-xl font-bold mt-4">
+            Lessons Coming Soon
+          </h3>
+
+          <p class="text-slate-500 mt-2">
+            এই কোর্সের লেসনগুলো শিগগিরই যুক্ত করা হবে।
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-6">
+
+        <!-- PROGRESS -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800">
+
+          <h3 class="text-xl font-bold">
+            Your Progress
+          </h3>
+
+          <div class="flex justify-between items-center mt-5 mb-2">
+
+            <span class="text-sm text-slate-500 dark:text-slate-400">
+              Completed Lessons
+            </span>
+
+            <span id="progressText" class="font-bold text-indigo-600">
+              0%
+            </span>
+
+          </div>
+
+          <div class="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+
+            <div id="progressBar"
+              class="h-full bg-indigo-600 rounded-full transition-all"
+              style="width:0%">
+            </div>
+
+          </div>
+
+          <p id="completedText"
+            class="text-sm text-slate-500 dark:text-slate-400 mt-3">
+            0 of 0 lessons completed
+          </p>
+
+        </div>
+
+        <!-- WHAT YOU LEARN -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800">
+
+          <h3 class="text-xl font-bold mb-5">
+            এই কোর্সে শিখবে
+          </h3>
+
+          <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+
+            <li class="flex gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-green-500 shrink-0"></i>
+              Step-by-step tutorials
+            </li>
+
+            <li class="flex gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-green-500 shrink-0"></i>
+              Real code examples
+            </li>
+
+            <li class="flex gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-green-500 shrink-0"></i>
+              Practice assignments
+            </li>
+
+            <li class="flex gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-green-500 shrink-0"></i>
+              Quiz and questions
+            </li>
+
+            <li class="flex gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-green-500 shrink-0"></i>
+              Final practical project
+            </li>
+
+          </ul>
+
+        </div>
+
+        <!-- MORE COURSES -->
+        <a href="courses.html"
+          class="block text-center w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition">
+          Browse More Courses
+        </a>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300">
+
+    <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+
+      <h3 class="text-xl font-bold text-white">
+        Web Academy BD
+      </h3>
+
+      <p class="text-sm mt-2">
+        Learn Web Development. Build Your Future.
+      </p>
+
+      <p class="text-xs text-slate-500 mt-5">
+        © 2026 Web Academy BD. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/course-details.js"></script>
+
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+
+</body>
+</html>
