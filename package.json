@@ -1,0 +1,14 @@
+{
+  "name": "web-academybd",
+  "version": "1.0.0",
+  "description": "Web Academy BD - Learn Web Development in Bangla",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["web-development", "education", "bangla", "tutorial"],
+  "author": "Web Academy BD",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.1.0"
+  }
+}
