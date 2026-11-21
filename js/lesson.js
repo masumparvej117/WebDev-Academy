@@ -218,7 +218,6 @@ function renderLesson(index) {
     lessonIndex = index;
 
     const lesson = lessons[index];
-
     const title = lesson.title || `Lesson ${index + 1}`;
 
     document.title = title + " | Web Academy BD";
@@ -325,13 +324,12 @@ function renderQuiz(quiz) {
             </div>
 
             <p class="quiz-result mt-4 text-sm font-semibold" aria-live="polite"></p>
-
         </div>
     `;
 }
 
 /* =====================================
-   10. QUIZ EVENTS
+   10. QUIZ & COPY EVENTS
 ===================================== */
 lessonContent?.addEventListener("click", event => {
     const option = event.target.closest(".quiz-option");
@@ -394,6 +392,7 @@ lessonContent?.addEventListener("click", event => {
             navigator.clipboard.writeText(code)
                 .then(() => {
                     copyButton.textContent = "Copied!";
+
                     setTimeout(() => {
                         copyButton.textContent = "Copy Code";
                     }, 1500);
@@ -438,7 +437,6 @@ function renderSidebar() {
                 <span class="text-sm font-semibold">
                     ${escapeHTML(lesson.title)}
                 </span>
-
             </button>
         `;
     }).join("");
@@ -498,14 +496,29 @@ completeBtn?.addEventListener("click", () => {
     updateProgress();
     renderSidebar();
 
-    alert("অভিনন্দন! Lesson Complete হয়েছে।");
-
+    // একই কোর্সের পরবর্তী Lesson
     if (lessonIndex < lessons.length - 1) {
-        if (confirm("পরবর্তী Lesson শুরু করতে চাও?")) {
-            renderLesson(lessonIndex + 1);
-        }
+        alert("অভিনন্দন! Lesson Complete হয়েছে।");
+        renderLesson(lessonIndex + 1);
+        return;
+    }
+
+    // কোর্সের সব Lesson শেষ
+    const nextCourse = checkCourseCompletion();
+
+    if (nextCourse) {
+        alert(
+            `অভিনন্দন! ${course.title} কোর্স সম্পন্ন হয়েছে।\n\nএবার ${nextCourse.title} কোর্স শুরু হচ্ছে!`
+        );
+
+        window.location.href =
+            `lesson.html?course=${encodeURIComponent(nextCourse.id)}&lesson=${encodeURIComponent(nextCourse.lessons[0].id ?? 0)}`;
+
     } else {
-        checkCourseCompletion();
+        alert("অভিনন্দন! তুমি সব উপলব্ধ কোর্স সম্পন্ন করেছো!");
+
+        window.location.href =
+            `certificate.html?course=${encodeURIComponent(courseId)}`;
     }
 });
 
@@ -517,17 +530,28 @@ function checkCourseCompletion() {
         return isCompleted(index);
     });
 
-    if (!allCompleted) return;
-
-    alert("অভিনন্দন! তুমি সম্পূর্ণ কোর্স শেষ করেছো!");
+    if (!allCompleted) return null;
 
     const student = getCurrentUser();
 
-    const certificates = JSON.parse(
-        localStorage.getItem("webAcademyCertificates") || "{}"
-    );
+    let certificates = {};
 
-    const userKey = student?.email || student?.username || "guest";
+    try {
+        certificates = JSON.parse(
+            localStorage.getItem("webAcademyCertificates") || "{}"
+        );
+
+        if (!certificates || typeof certificates !== "object") {
+            certificates = {};
+        }
+    } catch (error) {
+        certificates = {};
+    }
+
+    const userKey =
+        student?.email ||
+        student?.username ||
+        "guest";
 
     if (!certificates[userKey]) {
         certificates[userKey] = {};
@@ -537,22 +561,44 @@ function checkCourseCompletion() {
         certificates[userKey][courseId] = {
             courseId,
             courseName: course.title,
-            studentName: student?.name || student?.username || "Student",
+            studentName:
+                student?.name ||
+                student?.username ||
+                "Student",
             completedAt: new Date().toISOString(),
             certificateId:
-                "WABD-" + Date.now().toString(36).toUpperCase()
+                "WABD-" +
+                Date.now().toString(36).toUpperCase()
         };
 
-        localStorage.setItem(
-            "webAcademyCertificates",
-            JSON.stringify(certificates)
-        );
+        try {
+            localStorage.setItem(
+                "webAcademyCertificates",
+                JSON.stringify(certificates)
+            );
+        } catch (error) {
+            console.error("Certificate save error:", error);
+        }
     }
 
-    if (confirm("Certificate দেখতে চাও?")) {
-        window.location.href =
-            `certificate.html?course=${encodeURIComponent(courseId)}`;
+    // পরবর্তী Lesson-সহ কোর্স খোঁজা
+    const currentCourseIndex = courses.findIndex(
+        item => String(item.id).toLowerCase() === courseId
+    );
+
+    for (let i = currentCourseIndex + 1; i < courses.length; i++) {
+        const nextCourse = courses[i];
+
+        if (
+            nextCourse &&
+            Array.isArray(nextCourse.lessons) &&
+            nextCourse.lessons.length > 0
+        ) {
+            return nextCourse;
+        }
     }
+
+    return null;
 }
 
 /* =====================================
