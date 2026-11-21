@@ -1,0 +1,12 @@
+
+User-agent: *
+Allow: /
+
+# Private pages
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /profile.html
+Disallow: /auth.html
+
+# Sitemap
+Sitemap: https://web-academybd.vercel.app/sitemap.xml

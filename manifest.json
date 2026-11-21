@@ -1,0 +1,20 @@
+
+{
+  "name": "Web Academy BD",
+  "short_name": "Web Academy",
+  "description": "বাংলা ও ইংরেজিতে Web Development শেখার অনলাইন প্ল্যাটফর্ম।",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
